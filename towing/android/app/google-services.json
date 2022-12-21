@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "545883646552",
+    "project_id": "towingapp-fab00",
+    "storage_bucket": "towingapp-fab00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545883646552:android:401cb72f0c46b9390ef82d",
+        "android_client_info": {
+          "package_name": "com.example.towing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545883646552-8ote15nu1sr159v7kustq355aagourct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.towing",
+            "certificate_hash": "9e482e670b5963e1309479fe72f9f6a3a3763f7e"
+          }
+        },
+        {
+          "client_id": "545883646552-i77eni1a483rtauu6ur9qeu1gq8497mj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGdIxPEKbOCHK7V_ylMpU-E3vni-5wqy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545883646552-i77eni1a483rtauu6ur9qeu1gq8497mj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
