@@ -10,6 +10,7 @@ Image logoWidget(String imageName) {
     color: Colors.white,
   );
 }
+
 TextField reuseableTextField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return TextField(
@@ -17,30 +18,30 @@ TextField reuseableTextField(String text, IconData icon, bool isPasswordType,
     obscureText: isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
-    cursorColor: Colors.white,
+    cursorColor: Colors.black,
     style: TextStyle(color: Colors.black.withOpacity(0.9)),
     decoration: InputDecoration(
-      prefixIcon: Icon(
-        icon,
-        color: Colors.black,
-      ),
-      labelText: text,
-      labelStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
-      filled: true,
-      floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        borderSide: const BorderSide(width: 0,style: BorderStyle.none)
-      )
-    ),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.black,
+        ),
+        labelText: text,
+        labelStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
+        filled: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(width: 0, style: BorderStyle.none))),
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
+
   );
 }
 
-Container signInSignUpButton(BuildContext context, bool isLogin, Function onTap) {
+Container signInSignUpButton(
+    BuildContext context, bool isLogin, Function onTap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
@@ -53,24 +54,17 @@ Container signInSignUpButton(BuildContext context, bool isLogin, Function onTap)
       child: Text(
         isLogin ? 'LOG IN' : 'SIGN UP',
         style: const TextStyle(
-          color: Colors.black87,
-          fontWeight: FontWeight.bold,
-          fontSize: 16
-        ),
-
-    ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith((states){
-          if (states.contains(MaterialState.pressed)){
-            return Colors.blueGrey;
-          }
-          return Colors.blue;
-        }),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
-        )
+            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
       ),
-
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.blueGrey;
+            }
+            return Colors.blue;
+          }),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
     ),
   );
 }

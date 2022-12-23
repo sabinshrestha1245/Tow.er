@@ -25,8 +25,8 @@ class SplashPageState extends State<SplashPage> {
       await storage.write(key: "first", value: "false");
       Navigator.pushNamed(context, "/Signin");
     } else{
-      Navigator.pushNamed(context, "/Dashboard");
-      //Dashboard page
+      Navigator.pushNamed(context, "/HomePage");
+      //Homepage
       await storage.write(key: "first", value: "false");
     }
   }
@@ -65,7 +65,10 @@ class SigninState extends State<Signin> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 
-  Future<void> signInWithEmailAndPassword() async {
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       await Auth().signInWithEmailAndPassword(
         email: _emailTextController.text,
@@ -96,28 +99,29 @@ class SigninState extends State<Signin> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
+        width: size.width,
+        height: size.height,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height * 0.2, 20,0),
+            padding: const EdgeInsets.fromLTRB(20, 40, 20,0),
             child: Column(
               children: <Widget>[
-                /*image.("assets/images/Logo.png"),
-                const SizedBox(
-                  height: 30,
-                ),*/
-                /*logoWidget('assets/Logo.png'),
-                const SizedBox(
-                  height: 30,
-                ),*/
-
-                Image.asset('assets/Logo.png'),
+                Center(
+                  child: Image.asset('assets/Logo.png',
+                    fit: BoxFit.fitWidth,
+                    width: 120,
+                    height: 200,
+                  )
+                ),
+                const Text("Welcome",
+                  style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                const Text("Login to your account",
+                  style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                const SizedBox(height: 30,),
 
                 reuseableTextField("Enter UserName", Icons.person_outline, false, _emailTextController),
                 const SizedBox(height: 20,),
@@ -133,7 +137,13 @@ class SigninState extends State<Signin> {
                     print("Error ${error.toString()}");
                   });
                 }),
-                signUpOption()
+                signUpOption(),
+                GestureDetector(
+                    onTap: () async {
+                      await Auth().signInWithGoogle();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                    child: const Image(width: 100, image: AssetImage('assets/google.png')))
               ],
             ),
           ),
@@ -161,7 +171,4 @@ class SigninState extends State<Signin> {
       ],
     );
   }
-
-
-
 }

@@ -13,24 +13,29 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Text("Sign Up",
+      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Colors.black),),),
       body: Container(
-        color: Colors.white,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.red,
+
+        /*color: Colors.white,
         height: double.infinity,
         width: double.infinity,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),*/
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, MediaQuery
-                .of(context)
-                .size
-                .height * 0.2, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Column(
               children: <Widget>[
                 const SizedBox(
@@ -46,7 +51,8 @@ class _SignUpState extends State<SignUp> {
                     "Enter Email Id", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(height: 20,),
-                reuseableTextField("Enter Password", Icons.lock_outline, true,
+                reuseableTextField(
+                    "Enter Password", Icons.lock_outline, true,
                     _passwordTextController),
                 const SizedBox(
                   height: 20,
@@ -66,8 +72,6 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
         ),
-
-
       ),
     );
   }

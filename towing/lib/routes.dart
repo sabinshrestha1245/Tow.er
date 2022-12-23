@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'homepage.dart';
 import 'loginpage.dart';
 
 
@@ -10,8 +11,8 @@ class RouteGen{
         return CupertinoPageRoute(builder: (_)=>const SplashPage());
       case '/Signin':
         return CupertinoPageRoute(builder: (_)=>const Signin());
-      //case '/Dashboard':
-        //return CupertinoPageRoute(builder: (_)=> Dashboard());
+      case '/HomePage':
+        return CupertinoPageRoute(builder: (_)=> HomePage());
       //case '/NewsDetail':
         //return CupertinoPageRoute(builder: (_)=> const NewsDetail());
       default:
