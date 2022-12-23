@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:towing/loginpage.dart';
+import 'package:towing/splash_screen.dart';
 import 'routes.dart';
 import 'themes.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: rootTheme(),
       onGenerateRoute: RouteGen.generateRoute,
-      home: const SplashPage(),
+      home: SplashScreen(),
     );
   }
 }
