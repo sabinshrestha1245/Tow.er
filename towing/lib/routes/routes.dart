@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'homepage.dart';
-import 'loginpage.dart';
+import '../pages/homepage.dart';
+import '../pages/loginpage.dart';
 
 
 class RouteGen{

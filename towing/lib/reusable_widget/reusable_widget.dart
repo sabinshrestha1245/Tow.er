@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:towing/utils/colors_utils.dart';
 
-Image logoWidget(String imageName) {
-  return Image.asset(
-    imageName,
-    fit: BoxFit.fitWidth,
-    width: 240,
-    height: 240,
-    color: Colors.white,
-  );
-}
-
-TextField reuseableTextField(String text, IconData icon, bool isPasswordType,
+TextField reusableTextField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return TextField(
     controller: controller,
@@ -19,6 +8,7 @@ TextField reuseableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     cursorColor: Colors.black,
+
     style: TextStyle(color: Colors.black.withOpacity(0.9)),
     decoration: InputDecoration(
         prefixIcon: Icon(
@@ -37,11 +27,11 @@ TextField reuseableTextField(String text, IconData icon, bool isPasswordType,
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
 
+
   );
 }
 
-Container signInSignUpButton(
-    BuildContext context, bool isLogin, Function onTap) {
+Container firebaseUIButton(BuildContext context, String title, Function onTap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
@@ -52,14 +42,14 @@ Container signInSignUpButton(
         onTap();
       },
       child: Text(
-        isLogin ? 'LOG IN' : 'SIGN UP',
+        title,
         style: const TextStyle(
             color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
       ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
-              return Colors.blueGrey;
+              return Colors.black26;
             }
             return Colors.blue;
           }),
