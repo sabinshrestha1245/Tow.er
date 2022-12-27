@@ -1,9 +1,18 @@
+import 'package:Tower/Services/cleaning.dart';
+import 'package:Tower/Services/refuling.dart';
+import 'package:Tower/Services/servicing.dart';
+import 'package:Tower/Services/store.dart';
+import 'package:Tower/tow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GridDashboard extends StatelessWidget {
-  Items item1 = Items(title: "Tow", img: "assets/Logo.png");
+import '../Services/repair.dart';
 
+class GridDashboard extends StatelessWidget {
+  Items item1 = Items(
+    title: "Tow",
+    img: "assets/Logo.png",
+  );
   Items item2 = Items(
     title: "Servicing",
     img: "assets/Logo.png",
@@ -21,9 +30,42 @@ class GridDashboard extends StatelessWidget {
     img: "assets/Logo.png",
   );
   Items item6 = Items(
-    title: "coming soon",
+    title: "Repair",
     img: "assets/Logo.png",
   );
+
+  // void tapped(int index) {
+  //   index = 0;
+  //   switch (index) {
+  //     case 1:
+  //       Navigator.push(context, MaterialPageRoute(builder: (context) => Tow()));
+  //       break;
+  //
+  //     case 2:
+  //       print('Monday');
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Servicing()));
+  //       break;
+  //
+  //     case 3:
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Cleaning()));
+  //       break;
+  //
+  //     case 4:
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Refuling()));
+  //       break;
+  //     case 5:
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Store()));
+  //       break;
+  //
+  //     default:
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Repair()));
+  //   }
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +85,10 @@ class GridDashboard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 /*Center(child: Text("Choose a services")),*/
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Tow(),));
+                    },
+                    /*GestureDetector(
+                  // onTap: () => tapped(index),*/
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
