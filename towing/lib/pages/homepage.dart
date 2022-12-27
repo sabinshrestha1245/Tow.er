@@ -1,9 +1,12 @@
-import 'package:Tower/authentication/auth.dart';
-import 'package:Tower/pages/grid_dashboard.dart';
-import 'package:Tower/pages/loginpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+
+import 'package:Tower/authentication/auth.dart';
+import 'package:Tower/pages/grid_dashboard.dart';
+import 'package:Tower/pages/loginpage.dart';
+import 'package:Tower/pages/googlemap.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -97,16 +100,16 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),),
-              onTap: () {
+                onTap: ()=> Navigator.push(context,
+                MaterialPageRoute(builder: (context)=>
+                MapSample())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
-              },
+
+
             ),
-            const Divider(
-              thickness: 2,
-            ),
+
             ListTile(
               leading: const Icon(Icons.access_time_outlined, color: Colors.black,),
               title: const Text(
