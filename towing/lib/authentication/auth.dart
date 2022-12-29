@@ -1,7 +1,9 @@
+import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/utils/showOptDialog.dart';
 import 'package:Tower/utils/showSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Auth {
@@ -71,15 +73,19 @@ class Auth {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      ).then((uid) => {
+        Fluttertoast.showToast(msg: "Login Successful"),
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage())),
+      });
       if (!currentUser!.emailVerified){
         await sendEmailVerification(context);
         // restrict access to certain things using provider
         // transition to another page instead of home screen
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (error) {
       showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
+          context, error.message!); // Displaying the usual firebase error message
 
     }
   }

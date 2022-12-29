@@ -15,8 +15,6 @@ Future<void> main()  async {
         appId: '1:545883646552:android:401cb72f0c46b9390ef82d',
         messagingSenderId: '545883646552',
         projectId: 'towingapp-fab00',
-        //authDomain: 'https://news-app-a72fd-default-rtdb.asia-southeast1.firebasedatabase.app',
-        //databaseURL: 'https://react-native-firebase-testing.firebaseio.com',
         //storageBucket: 'news-app-a72fd.appspot.com',
       ),
     );}catch(e){

@@ -1,3 +1,4 @@
+import 'package:Tower/pages/googlemap.dart';
 import 'package:flutter/material.dart';
 
 class Tow extends StatefulWidget {
@@ -17,20 +18,26 @@ class _TowState extends State<Tow> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
-               Row(
-                children: [
-
-                  //set location
+              Row(
+                //crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  //shedule booking
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: EdgeInsets.all(12),
+
                     child: Icon(
-                      Icons.location_pin, color: Colors.black,),
+                      Icons.calendar_today,
+                      color: Colors.black,
+                    ),
                   )
                 ],
+              ),
+              SizedBox(
+                height: 10,
               ),
 
               //search bar
@@ -39,22 +46,28 @@ class _TowState extends State<Tow> {
                     color: Colors.cyan,
                     borderRadius: BorderRadius.circular(12)),
                 padding: EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    Icon(
+                //alignment: Alignment.centerLeft,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: 'Set your Location',
+                    labelText: 'Set Your Location',
+                    prefixIcon: Icon(
                       Icons.search,
                       color: Colors.black,
                     ),
-                    SizedBox(
-                      width: 5,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                      //borderSide: const BorderSide(width: 0, style: BorderStyle.none)
                     ),
-                    Text(
-                      'Set your Location',
-                      style: TextStyle(color: Colors.black),
-                    )
-                  ],
+                    suffixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.location_pin),
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

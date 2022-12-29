@@ -70,45 +70,51 @@ class GridDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Items> myList = [item1, item2, item3, item4, item5, item6];
-    var color = 0xff453658;
+    //var color = 0xff453658;
     return Flexible(
       child: GridView.count(
-          childAspectRatio: 1.0,
-          padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-          crossAxisCount: 2,
-          crossAxisSpacing: 18,
-          mainAxisSpacing: 18,
+          childAspectRatio: 0.9,
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+          crossAxisCount: 3,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
           children: myList.map((data) {
             return Container(
                 decoration: BoxDecoration(
-                    color: Color(color),
-                    borderRadius: BorderRadius.circular(10)),
-                /*Center(child: Text("Choose a services")),*/
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 3,
+                    )),
                 child: InkWell(
-                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Tow(),));
-                    },
-                    /*GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Tow(),
+                        ));
+                  },
+                  /*GestureDetector(
                   // onTap: () => tapped(index),*/
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image.asset(
                         data.img,
-                        width: 42,
+                        height: 60,
+                        width: 60,
                       ),
-                      const SizedBox(
-                        height: 14,
-                      ),
+                      /*const SizedBox(
+                        height: 8,
+                      ),*/
                       Text(
                         data.title,
                         style: GoogleFonts.openSans(
                             textStyle: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
-                      ),
-                      const SizedBox(
-                        height: 8,
                       ),
                     ],
                   ),
