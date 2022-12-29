@@ -1,9 +1,8 @@
 import 'dart:async';
-
+import 'package:Tower/pages/location_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:flutter/services.dart' show rootBundle;
 
 class MapSample extends StatefulWidget {
   @override
@@ -12,81 +11,73 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller = Completer();
-  late GoogleMapController mapController;
-  late String _mapStyle;
+
+  TextEditingController _searchController = TextEditingController();
+
+
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(27.700769, 85.300140),
-    zoom: 14.4746,
-  );
+      target: LatLng(37.42796133580664, -122.085749655962),
+      zoom: 14.4746,
+      );
 
-  List<Marker>_markers=[];
-  late LatLng latLng_global;
-  void addMarker(LatLng latlng){
-    // adding marker in the clicked latitude longitude
-    _markers.add(Marker(
-        markerId: MarkerId("adding markers"),
-        draggable: true,
-        position: latlng,
-        onTap: (){
-          //Show details of the place
-          //Show distance
-        },
-        onDrag: (newlatlng){
-          latLng_global = newlatlng;
-          setState(() {
-            //refresh page
-          });
-        }
-    ));
-  }
-
-  static const CameraPosition _kLake = CameraPosition(
-    // bearing: 192.8334901395799,
-      target: LatLng(15.386033, 73.844040),
-      tilt: 20,
-      zoom: 15);
-  @override
-  void initState() {
-    super.initState();
-
-    rootBundle.loadString('images/map.txt').then((string) {
-      _mapStyle = string;
-    });
-  }
+  static const Marker _kGooglePlexMarker = Marker(
+    markerId: MarkerId ('_kGooglePlex'),
+    infoWindow: InfoWindow(title: 'Google Plex'),
+    icon : BitmapDescriptor.defaultMarker,
+    position:LatLng(37.42796133580664, -122.085749655962),);
   @override
   Widget build(BuildContext context) {
-    var size= MediaQuery.of(context).size;
     return Scaffold(
-      body: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: GoogleMap(
-          mapType: MapType.hybrid,
-          initialCameraPosition: _kGooglePlex,
-          onTap: (latlong){
-            setState(() {
-              addMarker(latlong);
-            });
-          },
-          onMapCreated: (GoogleMapController controller) {
-            mapController= controller;
-            mapController.setMapStyle(_mapStyle);
-
-            _controller.complete(controller);
-          },
-        ),
+      appBar: AppBar(
+        title: Text('Google Maps'),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
-      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                controller: _searchController,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(hintText: 'Search Location'),
+                onChanged: (value){
+                  print(value);
+                },
+              )
+              ),
+              IconButton(
+                onPressed: () async{
+                  var place=
+                  await LocationService().getPlace(_searchController.text);
+                  _goToPlace(place);
+                },
+                icon: Icon(Icons.search),
+              ),
+            ],
+          ),
+          Expanded(
+            child:GoogleMap(
+            mapType: MapType.hybrid,
+            markers: {_kGooglePlexMarker},
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller){
+              _controller.complete(controller);
+            },
+          ),
+          )
+        ],
+      )
     );
   }
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
+  Future<void> _goToPlace(Map<String,dynamic> place) async {
+    final double lat = place['geometry']['location']['lat'];
+    final double lng = place['geometry']['location']['lng'];
 
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(target: LatLng(lat,lng),zoom: 12),
+    ),
+    );
+  }
 }
 
