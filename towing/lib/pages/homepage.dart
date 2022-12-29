@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MapSample())),
+                    MaterialPageRoute(builder: (context) => MapSample())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer
