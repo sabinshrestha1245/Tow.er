@@ -28,9 +28,6 @@ class _SignUpState extends State<SignUp> {
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
 
-  /*final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _userNameTextController = TextEditingController();*/
 
   @override
   Widget build(BuildContext context) {
@@ -255,31 +252,6 @@ class _SignUpState extends State<SignUp> {
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    /*const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTextField(
-                        "Enter UserName", Icons.person_outline, false,
-                        _userNameTextController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTextField(
-                        "Enter Email Id", Icons.mail, false,
-                        _emailTextController),
-                    const SizedBox(height: 20,),
-                    reusableTextField(
-                        "Enter Password", Icons.lock_outline, true,
-                        _passwordTextController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTextField(
-                        "Confirm Password", Icons.lock_outline, true,
-                        _passwordTextController),
-                    const SizedBox(
-                      height: 20,
-                    ),*/
 
                     SizedBox(height: 20),
                     firstNameField,
@@ -294,18 +266,6 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     signUpButton,
                     SizedBox(height: 15),
-                    /*firebaseUIButton(context, "Sign Up", () {
-                      FirebaseAuth.instance.createUserWithEmailAndPassword(
-                          email: _emailTextController.text,
-                          password: _passwordTextController.text)
-
-                      .then((value) {
-                        print("Created New Account");
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                      }).onError((error, stackTrace){
-                        print("Error ${error.toString()}");
-                      });
-                    })*/
                   ],
                 ),
               ),

@@ -100,13 +100,18 @@ class SigninState extends State<Signin> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail,color: Colors.black,),
+          prefixIcon: Icon(
+            Icons.mail,
+            color: Colors.black,
+          ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     //password field
@@ -115,7 +120,6 @@ class SigninState extends State<Signin> {
         controller: _passwordTextController,
         obscureText: true,
         cursorColor: Colors.black,
-
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
@@ -131,12 +135,17 @@ class SigninState extends State<Signin> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key, color: Colors.black,),
+          prefixIcon: Icon(
+            Icons.vpn_key,
+            color: Colors.black,
+          ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1, /*style: BorderStyle.*/)),
+              borderSide: const BorderSide(
+                width: 1, /*style: BorderStyle.*/
+              )),
         ));
 
     final loginButton = Material(
@@ -190,13 +199,10 @@ class SigninState extends State<Signin> {
                       height: 30,
                     ),
                     emailField,
-                    /* emailField("Enter Email", Icons.mail, _emailTextController),*/
                     const SizedBox(
                       height: 20,
                     ),
                     passwordField,
-                    /*passwordField("Enter Password", Icons.lock_outline,
-                        _passwordTextController),*/
                     const SizedBox(
                       height: 5,
                     ),
@@ -204,19 +210,6 @@ class SigninState extends State<Signin> {
                     const SizedBox(
                       height: 5,
                     ),
-                    /*firebaseUIButton(context, "LOG IN", () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text)
-                          .then((value) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => HomePage()));
-                      }).onError((error, stackTrace) {
-                        print("Error ${error.toString()}");
-                      });
-                    }),*/
-
                     loginButton,
                     const SizedBox(
                       height: 10,
@@ -302,45 +295,6 @@ class SigninState extends State<Signin> {
     );
   }
 
-  /*Future<void> signInWithEmailAndPassword() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await Auth().signInWithEmailAndPassword(
-          email: _emailTextController.text,
-          password: _passwordTextController.text,
-          context: context,
-        );
-      } on FirebaseAuthException catch (error) {
-        */ /*setState(() {
-          errorMessage = e.message;*/ /*
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "Your email address appears to be malformed.";
-
-            break;
-          case "wrong-password":
-            errorMessage = "Your password is wrong.";
-            break;
-          case "user-not-found":
-            errorMessage = "User with this email doesn't exist.";
-            break;
-          case "user-disabled":
-            errorMessage = "User with this email has been disabled.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Too many requests";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Signing in with Email and Password is not enabled.";
-            break;
-          default:
-            errorMessage = "An undefined Error happened.";
-        }
-        Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
-      }
-    }
-  }*/
 
   Widget forgetPassword(BuildContext context) {
     return Container(

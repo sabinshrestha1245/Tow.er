@@ -64,7 +64,11 @@ class Auth {
     }
   }
 
-  Future<void> signInWithEmailAndPassword({
+
+  authorizeAccess(BuildContext context) {
+  }
+
+  /*Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
     required BuildContext context,
@@ -88,9 +92,9 @@ class Auth {
           context, error.message!); // Displaying the usual firebase error message
 
     }
-  }
+  }*/
 
-  Future<void> createUserWithEmailAndPassword({
+  /*Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -98,7 +102,7 @@ class Auth {
       email: email,
       password: password,
     );
-  }
+  }*/
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
       _firebaseAuth.currentUser!.sendEmailVerification();
