@@ -21,18 +21,37 @@ class MapSampleState extends State<MapSample> {
 
   final List<Marker> _markers = [];
   final List<Marker> _list = [
-    const Marker(
+    /*const Marker(
       markerId: MarkerId('_kGooglePlex'),
       infoWindow: InfoWindow(title: 'Google Plex'),
       icon: BitmapDescriptor.defaultMarker,
       position: LatLng(37.42796133580664, -122.085749655962),
-    ),
+    ),*/
   ];
+  loadData() {
+    getUserCurrentLocation().then((value) async {
+      print('my current location');
+      print(value.latitude.toString() + " " + value.longitude.toString());
+
+      _markers.add(Marker(
+          markerId: MarkerId('3'),
+          position: LatLng(value.latitude, value.longitude),
+          infoWindow: InfoWindow(title: 'My current location')));
+
+      CameraPosition cameraPosition = CameraPosition(
+          zoom: 14, target: LatLng(value.latitude, value.longitude));
+      final GoogleMapController controller = await _controller.future;
+
+      controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      setState(() {});
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _markers.addAll(_list);
+    loadData();
   }
 
   @override
