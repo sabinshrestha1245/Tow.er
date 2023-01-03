@@ -1,4 +1,5 @@
 import 'package:Tower/model/user_model.dart';
+import 'package:Tower/pages/contact%20_information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:Tower/pages/grid_dashboard.dart';
 import 'package:Tower/pages/loginpage.dart';
 import 'package:Tower/pages/googlemap.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'generalsetting.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -155,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
                 },
               ),
               const Divider(
@@ -199,9 +202,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   // Update the state of the app
-                  // ...
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
                   // Then close the drawer
-                  Navigator.pop(context);
                 },
               ),
               const Divider(
