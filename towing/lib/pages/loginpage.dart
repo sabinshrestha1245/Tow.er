@@ -1,6 +1,7 @@
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
+import 'package:Tower/phone_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -215,6 +216,20 @@ class SigninState extends State<Signin> {
                       height: 10,
                     ),
                     signUpOption(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      child: Icon(Icons.phone),
+                      onTap: ()  {
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PhoneScreen()));
+
+                      },
+                    ),
                     GestureDetector(
                         onTap: () async {
                           await Auth().signInWithGoogle(context);
@@ -294,7 +309,6 @@ class SigninState extends State<Signin> {
       ],
     );
   }
-
 
   Widget forgetPassword(BuildContext context) {
     return Container(

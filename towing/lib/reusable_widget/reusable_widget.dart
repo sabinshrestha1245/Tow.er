@@ -202,3 +202,24 @@ TextFormField userNameField(
         ),
       ));
 }
+
+
+TextFormField PhoneTextField(
+    String text, IconData icon, TextEditingController controller) {
+  return TextFormField(
+      autofocus: false,
+      controller: controller,
+      keyboardType: TextInputType.name,
+      onSaved: (value) {
+        controller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.account_circle),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "User Name",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ));
+}
