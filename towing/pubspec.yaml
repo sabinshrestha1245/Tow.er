@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  webview_flutter: ^4.0.1
   easy_splash_screen:
   flutter:
     sdk: flutter
@@ -52,6 +53,8 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   geolocator: ^9.0.2
   image_picker: ^0.8.6
+  ionicons: ^0.2.1
+
 
 
 #  shared_preferences:
