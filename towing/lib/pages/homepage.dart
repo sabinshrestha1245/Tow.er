@@ -338,9 +338,9 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
                 ),
-                 const SizedBox(
+                /* const SizedBox(
                   height: 10,
-                ),
+                ),*/
                 GridDashboard()
               ],
             ),
