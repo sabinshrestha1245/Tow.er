@@ -331,16 +331,16 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                 ),
                 Text(
-                  "Choose A service",
+                  "Choose A Service",
                   style: GoogleFonts.openSans(
                       textStyle: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
                 ),
-                /* const SizedBox(
+                 const SizedBox(
                   height: 10,
-                ),*/
+                ),
                 GridDashboard()
               ],
             ),

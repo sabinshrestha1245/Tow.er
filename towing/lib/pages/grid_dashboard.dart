@@ -34,38 +34,64 @@ class GridDashboard extends StatelessWidget {
     img: "assets/Logo.png",
   );
 
-  // void tapped(int index) {
-  //   index = 0;
-  //   switch (index) {
-  //     case 1:
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => Tow()));
-  //       break;
-  //
-  //     case 2:
-  //       print('Monday');
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Servicing()));
-  //       break;
-  //
-  //     case 3:
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Cleaning()));
-  //       break;
-  //
-  //     case 4:
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Refuling()));
-  //       break;
-  //     case 5:
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Store()));
-  //       break;
-  //
-  //     default:
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Repair()));
-  //   }
-  //}
+  /*Widget tapped(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Tow()));
+        break;
+
+      case 1:
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Servicing()));
+        break;
+
+      case 2:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Cleaning()));
+        break;
+
+      case 3:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Refuling()));
+        break;
+      case 4:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Store()));
+        break;
+
+      default:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Repair()));
+    }
+  }
+*/
+  Widget tapped(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        return Tow();
+        break;
+
+      case 1:
+        return Servicing();
+        break;
+
+      case 2:
+        return Cleaning();
+        break;
+
+      case 3:
+        return Refuling();
+        break;
+
+      case 4:
+        return Store();
+        break;
+
+      default:
+        return Repair();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,11 +118,10 @@ class GridDashboard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Tow(),
+                          builder: (context) =>
+                              tapped(context, myList.indexOf(data)),
                         ));
                   },
-                  /*GestureDetector(
-                  // onTap: () => tapped(index),*/
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

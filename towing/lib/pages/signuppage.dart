@@ -329,6 +329,7 @@ class _SignUpState extends State<SignUp> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.lastName = lastNameEditingController.text;
+    //UserModel.role = user.role;
 
     await firebaseFirestore
         .collection("users")
