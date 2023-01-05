@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:Tower/authentication/auth.dart';
 import 'package:Tower/pages/grid_dashboard.dart';
 import 'package:Tower/pages/loginpage.dart';
-import 'package:Tower/pages/googlemap.dart';
+import 'package:Tower/map/googlemap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'generalsetting.dart';
