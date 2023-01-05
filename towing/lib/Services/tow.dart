@@ -1,4 +1,4 @@
-import 'package:Tower/pages/googlemap.dart';
+import 'package:Tower/map/googlemap.dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';

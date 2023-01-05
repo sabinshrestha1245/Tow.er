@@ -54,6 +54,8 @@ dependencies:
   geolocator: ^9.0.2
   image_picker: ^0.8.6
   ionicons: ^0.2.1
+  geocoding: ^2.0.4
+  provider: ^6.0.2
 
 
 
