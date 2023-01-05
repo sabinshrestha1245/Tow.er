@@ -113,10 +113,10 @@ class MapSampleState extends State<MapSample> {
             },
           ),
             Visibility(visible: isPinMarkerVisible,
-              child: Image.memory(pickUpMarker,height: 40,width: 40,
+              child: Image.memory(pickUpMarker,height: 50,width: 50,
               alignment: Alignment.center,
                 frameBuilder: (context, child, frame, wasSynchronouslyLoaded){
-              return Transform.translate(offset:const Offset(0, -84 ),child:child);
+              return Transform.translate(offset:const Offset(0, -20 ),child:child);
                 },
             ),
             ),

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class AssistantMethods{
 
   static Future<Uint8List> getMarker(String pickUpMarker, context) async{
-    ByteData byteData = await DefaultAssetBundle.of(context).load("Assets/images/pickUpMarker.jpg");
+    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/marker.png");
     return byteData.buffer.asUint8List();
   }
 
