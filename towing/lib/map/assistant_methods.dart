@@ -19,7 +19,7 @@ class AssistantMethods{
     String province = "";
     String locality = "";
     String name = "" ;
-    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.latitude);
+    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
     if(placemarks.isNotEmpty){
       province = placemarks[0].country == null? " ": placemarks[0].administrativeArea!;
       locality = placemarks[0].locality == null? " ": placemarks[0].locality!;
@@ -32,5 +32,6 @@ class AssistantMethods{
     userPickUpAddress.placeName = placeAddress;
     Provider.of<AppData>(context, listen: false ). updatePickUpLocationAddress(userPickUpAddress);
     return placeAddress;
+    print(placeAddress);
   }
 }

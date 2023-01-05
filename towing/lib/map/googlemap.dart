@@ -43,7 +43,7 @@ class MapSampleState extends State<MapSample> {
       _initialPosition =
           LatLng(userCurrentPosition!.latitude, userCurrentPosition!.longitude);
       _cameraPosition =
-          CameraPosition(target: _initialPosition as LatLng, zoom: 14.5);
+          CameraPosition(target: _initialPosition as LatLng, zoom: 16.0);
       _newGoogleMapController?.animateCamera(
           CameraUpdate.newCameraPosition(_cameraPosition!));
     });
