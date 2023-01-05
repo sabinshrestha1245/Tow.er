@@ -3,8 +3,16 @@ import 'package:Tower/map/app_data.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:geocoding/geocoding.dart';
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
 
 class AssistantMethods{
+
+  static Future<Uint8List> getMarker(String pickUpMarker, context) async{
+    ByteData byteData = await DefaultAssetBundle.of(context).load("Assets/images/pickUpMarker.jpg");
+    return byteData.buffer.asUint8List();
+  }
 
   static Future<String> pickOriginPositionOnMap(LatLng position, context) async {
     String placeAddress = "";
@@ -15,7 +23,7 @@ class AssistantMethods{
     if(placemarks.isNotEmpty){
       province = placemarks[0].country == null? " ": placemarks[0].administrativeArea!;
       locality = placemarks[0].locality == null? " ": placemarks[0].locality!;
-      name=placemarks[0].name == null? " ": placemarks[0].name!;
+      name = placemarks[0].name == null? " ": placemarks[0].name!;
       placeAddress = name + ", " + locality + ", " + province;
     }
     Address userPickUpAddress = Address();

@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:Tower/map/app_data.dart';
 import 'package:Tower/map/assistant_methods.dart';
+import 'package:Tower/map/global.dart';
 import 'package:Tower/map/location_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +23,11 @@ class MapSampleState extends State<MapSample> {
   var geoLocator = Geolocator();
   Position? userCurrentPosition;
   static LatLng? _initialPosition;
-
   static CameraPosition? _cameraPosition;
+  Set<Circle> circlesSet ={};
+  LatLng? onCameraMoveEndLatLng;
+  bool isPinMarkerVisible = false;
+  Uint8List pickUpMarker = Uint8List.fromList([]);
 
   checkIfLocationPermissionAllowed() async {
     _locationPermission = await Geolocator.requestPermission();
@@ -44,7 +49,20 @@ class MapSampleState extends State<MapSample> {
     });
   }
 
-  // TextEditingController _searchController = TextEditingController();
+  Future<LatLng> pickLocationOnMap(CameraPosition _onCameraMovePosition) async{
+    LatLng onCameraMoveLatLng = _onCameraMovePosition.target;
+    Circle pinCircle = Circle(
+        circleId: const CircleId("0"),
+        radius: 1 , zIndex: 1,
+        strokeColor: Colors.black54,
+        center: onCameraMoveLatLng,
+        fillColor: Colors.blue.withAlpha(70));
+    circlesSet.add(pinCircle);
+    return onCameraMoveLatLng;
+  }
+  void _getPinnedAddress() async{
+    await AssistantMethods.pickOriginPositionOnMap(onCameraMoveEndLatLng!, context);
+  }
 
   @override
   void initState() {
@@ -74,21 +92,37 @@ class MapSampleState extends State<MapSample> {
           children: [
             GoogleMap(padding: const EdgeInsets.only(bottom: 130),
             mapType: MapType.normal,
-            // markers: Set<Marker>.of(_markers),
-            initialCameraPosition: _cameraPosition!,
             myLocationButtonEnabled: true,
             myLocationEnabled: true,
             zoomControlsEnabled: false,
             zoomGesturesEnabled: true,
+            circles: circlesSet,
+            initialCameraPosition: _cameraPosition!,
+
+            onCameraMove: (position) async {
+              if(isPinMarkerVisible){
+                onCameraMoveEndLatLng = await pickLocationOnMap(position);
+                print(onCameraMoveEndLatLng);
+              }
+            },
+              onCameraIdle: _getPinnedAddress,
 
             onMapCreated: (GoogleMapController controller) {
               _controllerGoogleMap.complete(controller);
               _newGoogleMapController = controller;
             },
           ),
+            Visibility(visible: isPinMarkerVisible,
+              child: Image.memory(pickUpMarker,height: 40,width: 40,
+              alignment: Alignment.center,
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded){
+              return Transform.translate(offset:const Offset(0, -84 ),child:child);
+                },
+            ),
+            ),
 
             Positioned(bottom: 0.0, left: 0.0, right:0 ,
-            child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(35.0), color: Colors.white),
+            child: Container(decoration: BoxDecoration(borderRadius: radius, color: Colors.white),
             height: 130.0,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
@@ -111,16 +145,16 @@ class MapSampleState extends State<MapSample> {
                     ],),
                   ),
                   const SizedBox(height: 4.0,),
-                  // TextButton(
-                  // onPressed: () async{
-                  //   pickUpMarker = await AssistantMethods.getMarker(userPickUpMarker,context);
-                  //   setState(() {
-                  //     isPinMarkerVisible = true;
-                  //   });
-                  // },
-                  //     child: const Text("Pick Place on map",
-                  //     style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.bold),),
-                  // )
+                  TextButton(
+                  onPressed: () async{
+                    pickUpMarker = await AssistantMethods.getMarker(userPickUpMarker,context);
+                    setState(() {
+                      isPinMarkerVisible = true;
+                    });
+                  },
+                      child: const Text("Pick Place on map",
+                      style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.bold),),
+                  )
                 ],
               ),
             ),
