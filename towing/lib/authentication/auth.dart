@@ -56,17 +56,14 @@ class Auth {
   }
 
   // ANONYMOUS SIGN IN
-  Future<void> signInAnonymously(BuildContext context) async {
+  /*Future<void> signInAnonymously(BuildContext context) async {
     try {
       await _firebaseAuth.signInAnonymously();
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }
-  }
+  }*/
 
-
-  authorizeAccess(BuildContext context) {
-  }
 
   /*Future<void> signInWithEmailAndPassword({
     required String email,

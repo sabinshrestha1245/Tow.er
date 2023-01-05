@@ -4,54 +4,8 @@ import 'package:Tower/pages/signuppage.dart';
 import 'package:Tower/phone_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../authentication/auth.dart';
-
-class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
-
-  @override
-  State<SplashPage> createState() {
-    return SplashPageState();
-  }
-}
-
-class SplashPageState extends State<SplashPage> {
-  final storage = const FlutterSecureStorage();
-  readfromstorage() async {
-    String? value = await storage.read(key: "first");
-    if (value == null) {
-      //go to registration
-      //first false
-      await storage.write(key: "first", value: "false");
-      Navigator.pushNamed(context, "/Signin");
-    } else {
-      Navigator.pushNamed(context, "/HomePage");
-      //Homepage
-      await storage.write(key: "first", value: "false");
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    //readfromstorage();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return HomePage();
-        }
-        return const Signin();
-      },
-    );
-  }
-}
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -74,6 +28,7 @@ class SigninState extends State<Signin> {
 
   //firebase
   final _firebaseAuth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -221,13 +176,11 @@ class SigninState extends State<Signin> {
                     ),
                     GestureDetector(
                       child: Icon(Icons.phone),
-                      onTap: ()  {
-
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PhoneScreen()));
-
                       },
                     ),
                     GestureDetector(
@@ -259,6 +212,7 @@ class SigninState extends State<Signin> {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => HomePage())),
+
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

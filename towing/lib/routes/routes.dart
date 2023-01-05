@@ -1,3 +1,4 @@
+import 'package:Tower/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../pages/homepage.dart';
