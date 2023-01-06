@@ -25,6 +25,7 @@ class _SignUpState extends State<SignUp> {
   final firstNameEditingController = new TextEditingController();
   final lastNameEditingController = new TextEditingController();
   final emailEditingController = new TextEditingController();
+  final phoneEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
 
@@ -129,6 +130,40 @@ class _SignUpState extends State<SignUp> {
               borderRadius: BorderRadius.circular(30.0),
               borderSide: const BorderSide(width: 1,)),
         ));
+
+    final phoneField = TextFormField(
+        autofocus: false,
+        controller: phoneEditingController,
+        keyboardType: TextInputType.phone,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Phone Number");
+          }
+          // reg expression for email validation
+          if (value.length != 10) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          phoneEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.phone,
+            color: Colors.black,
+          ),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Phone Number",
+          fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(width: 1,)),
+        ));
+
 
     //password field
     final passwordField = TextFormField(
@@ -260,6 +295,8 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     emailField,
                     SizedBox(height: 20),
+                    phoneField,
+                    SizedBox(height: 20),
                     passwordField,
                     SizedBox(height: 20),
                     confirmPasswordField,
@@ -317,7 +354,7 @@ class _SignUpState extends State<SignUp> {
   postDetailsToFirestore() async {
     // calling our firestore
     // calling our user model
-    // sedning these values
+    // sending these values
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _firebaseAuth.currentUser;
@@ -329,6 +366,7 @@ class _SignUpState extends State<SignUp> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.lastName = lastNameEditingController.text;
+    userModel.phone = phoneEditingController.text;
     //UserModel.user = user.;
 
     await firebaseFirestore

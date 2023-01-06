@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
       showLoader: true,
       loadingText: const Text("Loading..."),
       navigator: const SplashPage(),
-      durationInSeconds: 5,
+      durationInSeconds: 2,
     );
   }
 }

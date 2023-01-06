@@ -25,13 +25,16 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
       this.loggedInUser = UserModel.fromMap(value.data());
+
       setState(() {});
+
     });
   }
 
@@ -60,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+
                       Text(
                         "${loggedInUser.firstName} ${loggedInUser.lastName}",
                         style: GoogleFonts.openSans(
@@ -76,10 +80,10 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      /*SizedBox(
+                     /* SizedBox(
                       height: 50,
-                      child:*/
-                      /*Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
+                      child:
+                      Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
                             ),
                         ),*/
 
@@ -293,6 +297,9 @@ class _HomePageState extends State<HomePage> {
                             ))),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 //greeting
                 Container(
                   child: Column(
@@ -304,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                             textStyle: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
-                          // fontWeight: FontWeight.w600
+                          fontWeight: FontWeight.w600
                         )),
                       ),
                       const SizedBox(
@@ -320,6 +327,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         "${loggedInUser.email}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        "${loggedInUser.phone}",
                         style: GoogleFonts.openSans(
                             textStyle: const TextStyle(
                                 color: Colors.black,
