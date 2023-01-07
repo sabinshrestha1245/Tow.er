@@ -1,3 +1,4 @@
+import 'package:Tower/authentication/auth.dart';
 import 'package:Tower/model/user_model.dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -322,6 +323,7 @@ class _SignUpState extends State<SignUp> {
             .catchError((e) {
           Fluttertoast.showToast(msg: e!.message);
         });
+        //await sendEmailVerification(context);
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":

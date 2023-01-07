@@ -19,7 +19,7 @@ class _ServicingState extends State<Servicing> {
           children: [
 
             Container(
-              height: size.height,
+              height: 800,
                 child: MapSample()),
           ],
         ),
