@@ -9,8 +9,12 @@ import 'package:flutter/material.dart';
 
 class AssistantMethods{
 
-  static Future<Uint8List> getMarker(String pickUpMarker, context) async{
-    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/marker.png");
+  static Future<Uint8List> getPickMarker(String pickUpMarker, context) async{
+    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/PickUpMarker.png");
+    return byteData.buffer.asUint8List();
+  }
+  static Future<Uint8List> getDropMarker(String dropOffMarker, context) async{
+    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/DropOffMarker.png");
     return byteData.buffer.asUint8List();
   }
 

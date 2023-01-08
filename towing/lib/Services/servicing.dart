@@ -17,10 +17,7 @@ class _ServicingState extends State<Servicing> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
-            Container(
-              height: 800,
-                child: MapSample()),
+            Container(height: 800, child: MapRepair()),
           ],
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:Tower/map/googlemap.dart';
+import 'package:Tower/map/googlemap(pick+drop).dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _TowState extends State<Tow> {
         child: SafeArea(
           child: Column(
             children: [
-          /*Container(
+              /*Container(
           decoration: BoxDecoration(
           color: Colors.cyan,
               borderRadius: BorderRadius.circular(12)),
@@ -45,11 +45,7 @@ class _TowState extends State<Tow> {
               ),
             ),
           ),),*/
-              Container(
-                  height: 800,
-              child: MapSample()
-              ),
-
+              Container(height: 800, child: MapElse()),
             ],
           ),
         ),
@@ -65,7 +61,7 @@ class _TowState extends State<Tow> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  *//*Row(
+                  */ /*Row(
                     //crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       //shedule booking
@@ -114,8 +110,8 @@ class _TowState extends State<Tow> {
                         ),
                       ),
                     ),
-                  ),*//*
-                  MapSample()
+                  ),*/ /*
+                  MapElse()
                 ],
               ),
             ),
