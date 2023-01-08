@@ -23,7 +23,8 @@ class AssistantMethods{
     if(placemarks.isNotEmpty){
       province = placemarks[0].country == null? " ": placemarks[0].administrativeArea!;
       locality = placemarks[0].locality == null? " ": placemarks[0].locality!;
-      name = placemarks[0].name == null? " ": placemarks[0].name!;
+      name = placemarks[0].name == null? " ": placemarks[0].subLocality!;
+
       placeAddress = name + ", " + locality + ", " + province;
     }
     Address userPickUpAddress = Address();

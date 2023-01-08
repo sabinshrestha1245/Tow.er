@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.yellow),
+                  decoration: const BoxDecoration(color: Colors.cyan),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                     //meue or drawer
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
+                          color: Colors.cyan,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.all(5),
                       child: IconButton(
@@ -282,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                     //Notification
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.yellowAccent,
+                            color: Colors.cyan,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
