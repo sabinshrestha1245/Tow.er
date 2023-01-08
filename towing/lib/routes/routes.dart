@@ -1,3 +1,5 @@
+import 'package:Tower/driver_dashboard.dart';
+import 'package:Tower/mechanic_dashboard.dart';
 import 'package:Tower/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,11 @@ class RouteGen{
       case '/Signin':
         return CupertinoPageRoute(builder: (_)=>const Signin());
       case '/HomePage':
-        return CupertinoPageRoute(builder: (_)=> HomePage());
-      //case '/NewsDetail':
-        //return CupertinoPageRoute(builder: (_)=> const NewsDetail());
+        return CupertinoPageRoute(builder: (_)=> const HomePage());
+      case '/DriverDashboard':
+        return CupertinoPageRoute(builder: (_)=> const DriverDashboard());
+      case '/MechanicDashboard':
+        return CupertinoPageRoute(builder: (_)=> const MechanicDashboard());
       default:
         return _errorRoute();
     }

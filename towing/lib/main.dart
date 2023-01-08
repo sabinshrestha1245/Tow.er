@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
-import 'themes.dart';
+
 
 
 Future<void> main()  async {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'TOW-ER',
           debugShowCheckedModeBanner: false,
-          theme: rootTheme(),
+          //theme: rootTheme(),
           onGenerateRoute: RouteGen.generateRoute,
           home: SplashScreen(),
         ),);

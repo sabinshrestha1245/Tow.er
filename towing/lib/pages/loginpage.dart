@@ -1,3 +1,5 @@
+import 'package:Tower/mechanic_dashboard.dart';
+import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
 import 'package:Tower/phone_login.dart';
@@ -219,13 +221,13 @@ class SigninState extends State<Signin> {
                   .get().then((value) =>Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const HomePage())) ),
                   // Driver Dashboard
-                  // FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Driver")
-                  // .get().then((value) =>Navigator.of(context).pushReplacement(
-                  // MaterialPageRoute(builder: (context) => Driver_Dashboard())) ),
+                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Driver")
+                  .get().then((value) =>Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => DriverDashboard())) ),
                   // Mechanic Dashboard
-                  // FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Mechanic")
-                  // .get().then((value) =>Navigator.of(context).pushReplacement(
-                  // MaterialPageRoute(builder: (context) => MechanicDashboard())) ),
+                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Mechanic")
+                  .get().then((value) =>Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => MechanicDashboard())) ),
 
 
           // Add code here to check if the user is a customer, driver or mechanic.

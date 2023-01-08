@@ -1,6 +1,10 @@
+import 'package:Tower/gird_driver.dart';
+import 'package:Tower/mechanic_dashboard.dart';
 import 'package:Tower/model/user_model.dart';
 import 'package:Tower/pages/contact%20_information.dart';
 import 'package:Tower/pages/generalsetting.dart';
+import 'package:Tower/pages/homepage.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,31 +12,17 @@ import 'package:Tower/authentication/auth.dart';
 import 'package:Tower/pages/grid_dashboard.dart';
 import 'package:Tower/pages/loginpage.dart';
 import 'package:Tower/map/googlemap.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Driver_Dashboard extends StatefulWidget {
-  const Driver_Dashboard({Key? key}) : super(key: key);
+class DriverDashboard extends StatefulWidget {
+  const DriverDashboard({Key? key}) : super(key: key);
 
   @override
-  State<Driver_Dashboard> createState() => _Driver_DashboardState();
+  State<DriverDashboard> createState() => _DriverDashboardState();
 }
 
-class _Driver_DashboardState extends State<Driver_Dashboard> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _DriverDashboardState extends State<DriverDashboard> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
@@ -53,6 +43,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.yellow),
+                  decoration: const BoxDecoration(color: Colors.cyan),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -128,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage())),
+                    MaterialPageRoute(builder: (context) => DriverDashboard())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer
@@ -205,7 +197,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(
                 thickness: 2,
               ),
-              ListTile(
+              /*ListTile(
                 leading: const Icon(
                   Icons.chat_bubble_outline,
                   color: Colors.black,
@@ -223,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
-              ),
+              ),*/
               const Divider(
                 thickness: 2,
               ),
@@ -286,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                     //meue or drawer
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
+                          color: Colors.cyan,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.all(5),
                       child: IconButton(
@@ -300,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                     //Notification
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.yellowAccent,
+                            color: Colors.cyan,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
@@ -372,10 +364,45 @@ class _HomePageState extends State<HomePage> {
                 /* const SizedBox(
                   height: 10,
                 ),*/
-                GridDashboard()
+                GridDriver()
               ],
             ),
           ),
-        ));
+        ),
+        bottomNavigationBar: BottomNavyBar(
+          selectedIndex: _selectedIndex,
+          showElevation: true, // use this to remove appBar's elevation
+          onItemSelected: (index) => setState(() {
+            _selectedIndex = index;
+            Fluttertoast.showToast(
+                msg: "This is Center Short Toast",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }),
+          items: [
+            BottomNavyBarItem(
+              icon: const Icon(Icons.apps),
+              title: const Text('Home'),
+              activeColor: Colors.red,
+            ),
+            BottomNavyBarItem(
+                icon: const Icon(Icons.people),
+                title: const Text('Users'),
+                activeColor: Colors.purpleAccent),
+            BottomNavyBarItem(
+                icon: const Icon(Icons.message),
+                title: const Text('Messages'),
+                activeColor: Colors.pink),
+            BottomNavyBarItem(
+                icon: const Icon(Icons.settings),
+                title: const Text('Settings'),
+                activeColor: Colors.blue),
+          ],
+        )
+    );
   }
 }

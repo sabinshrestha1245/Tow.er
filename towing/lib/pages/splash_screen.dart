@@ -25,7 +25,7 @@ class SplashPageState extends State<SplashPage> {
       await storage.write(key: "first", value: "false");
       Navigator.pushNamed(context, "/Signin");
     } else {
-      Navigator.pushNamed(context, "/HomePage");
+      Navigator.pushNamed(context, "/HomePage",);
       //Homepage
       await storage.write(key: "first", value: "false");
     }
@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
       showLoader: true,
       loadingText: const Text("Loading..."),
       navigator: const SplashPage(),
-      durationInSeconds: 2,
+      durationInSeconds: 1,
     );
   }
 }
