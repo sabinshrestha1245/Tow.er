@@ -19,9 +19,9 @@ Future<void> main()  async {
         projectId: 'towingapp-fab00',
       ),
     );}catch(e){
-    if (kDebugMode) {
+    /*if (kDebugMode) {
       print(e.toString());
-    }
+    }*/
   }
   runApp(const MyApp());
 }
