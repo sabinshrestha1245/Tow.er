@@ -1,6 +1,7 @@
 import 'package:Tower/authentication/auth.dart';
 import 'package:Tower/model/user_model.dart';
 import 'package:Tower/pages/homepage.dart';
+import 'package:Tower/pages/loginpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,21 @@ class _SignUpState extends State<SignUp> {
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
 
+  String dropdownvalue = 'Customer';
+  var items = [
+    "Customer",
+    "Driver",
+    "Mechanic",
+  ];
+
 
   @override
   Widget build(BuildContext context) {
+
+    var size = MediaQuery.of(context).size;
+
+
+
     //first name field
     final firstNameField = TextFormField(
         autofocus: false,
@@ -241,7 +254,7 @@ class _SignUpState extends State<SignUp> {
           onPressed: () {
             signUp(emailEditingController.text, passwordEditingController.text);
           },
-          child: Text(
+          child: const Text(
             "SignUp",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -249,10 +262,41 @@ class _SignUpState extends State<SignUp> {
           )),
     );
 
+    final userRole = SizedBox(
+      // width: size.width,
+      child: DropdownButtonFormField(
+       decoration:  InputDecoration(
+         prefixIcon: const Icon(Icons.person_add_alt,
+         color: Colors.black87,),
+         contentPadding: const EdgeInsets.fromLTRB(20, 15,0, 15),
+         border: OutlineInputBorder(
+             borderRadius: BorderRadius.circular(30.0),
+             borderSide:  const BorderSide(width: 1,)),
+       ),
+          value: dropdownvalue,
+      items:
+        items.map((String items){
+          return DropdownMenuItem(
+            value: items,
+            child: Text(items),
+          );
+      }).toList(),
+      onChanged: (String? newValue){
+            setState(() {
+              dropdownvalue = newValue!;
+            });
+      },
+      /*icon: const Padding( //Icon at tail, arrow bottom is default icon
+      padding: EdgeInsets.only(left:20),
+          child:Icon(Icons.arrow_circle_down_sharp)
+      ),*/
+      ),
+    );
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.cyan,
         elevation: 0,
         title: const Text(
           "Sign Up",
@@ -294,7 +338,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     lastNameField,
                     SizedBox(height: 20),
-                    emailField,
+                    userRole,
                     SizedBox(height: 20),
                     phoneField,
                     SizedBox(height: 20),
@@ -302,6 +346,8 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     confirmPasswordField,
                     SizedBox(height: 20),
+                    emailField,
+                    SizedBox(height: 20,),
                     signUpButton,
                     SizedBox(height: 15),
                   ],
@@ -369,7 +415,7 @@ class _SignUpState extends State<SignUp> {
     userModel.firstName = firstNameEditingController.text;
     userModel.lastName = lastNameEditingController.text;
     userModel.phone = phoneEditingController.text;
-    //UserModel.user = user.;
+    userModel.role = dropdownvalue;
 
     await firebaseFirestore
         .collection("users")
@@ -378,6 +424,6 @@ class _SignUpState extends State<SignUp> {
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 
     Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
+        MaterialPageRoute(builder: (context) => Signin()), (route) => false);
   }
 }

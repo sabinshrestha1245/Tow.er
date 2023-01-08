@@ -15,8 +15,8 @@ class UserModel {
       email: map['email'],
       firstName: map['firstName'],
       lastName: map['lastName'],
-      role: map['user'],
       phone: map['phone'],
+      role: map['role'],
     );
   }
 
@@ -27,8 +27,8 @@ class UserModel {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
-      'role' : 'user',
       'phone' : phone,
+      'role' : role,
     };
   }
 }

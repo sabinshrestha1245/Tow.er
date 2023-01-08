@@ -1,5 +1,6 @@
 import 'package:Tower/model/user_model.dart';
 import 'package:Tower/pages/contact%20_information.dart';
+import 'package:Tower/pages/generalsetting.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:Tower/pages/loginpage.dart';
 import 'package:Tower/map/googlemap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'generalsetting.dart';
 
 
 class MechanicDashboard extends StatefulWidget {

@@ -2,6 +2,7 @@ import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
 import 'package:Tower/phone_login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,6 +29,8 @@ class SigninState extends State<Signin> {
 
   //firebase
   final _firebaseAuth = FirebaseAuth.instance;
+  final currentUser = FirebaseAuth.instance.currentUser;
+
 
 
   @override
@@ -204,12 +207,14 @@ class SigninState extends State<Signin> {
   }
 
   void signIn(String email, String password) async {
+    final user = FirebaseFirestore.instance.collection("users").doc(currentUser?.uid);
     if (_formKey.currentState!.validate()) {
       try {
         await _firebaseAuth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
+
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => HomePage())),
 
