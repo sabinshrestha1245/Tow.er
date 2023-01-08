@@ -1,4 +1,3 @@
-import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
 import 'package:Tower/phone_login.dart';
@@ -7,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../authentication/auth.dart';
+import '../driver_dashboard.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -214,11 +214,26 @@ class SigninState extends State<Signin> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
+                  // Customer Dashboard
+                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Customer")
+                  .get().then((value) =>Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomePage())) ),
+                  // Driver Dashboard
+                  // FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Driver")
+                  // .get().then((value) =>Navigator.of(context).pushReplacement(
+                  // MaterialPageRoute(builder: (context) => Driver_Dashboard())) ),
+                  // Mechanic Dashboard
+                  // FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Mechanic")
+                  // .get().then((value) =>Navigator.of(context).pushReplacement(
+                  // MaterialPageRoute(builder: (context) => MechanicDashboard())) ),
 
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomePage())),
+
+          // Add code here to check if the user is a customer, driver or mechanic.
+                  /*Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePage())),*/
 
                 });
+
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":
