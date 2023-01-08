@@ -2,7 +2,7 @@ import 'package:Tower/mechanic/mechanic_dashboard.dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
-import 'package:Tower/phone_login.dart';
+import 'package:Tower/pages/phone_login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

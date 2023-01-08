@@ -1,5 +1,4 @@
 import 'package:Tower/pages/homepage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
