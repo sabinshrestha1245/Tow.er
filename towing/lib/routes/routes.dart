@@ -16,13 +16,14 @@ class RouteGen{
         return CupertinoPageRoute(builder: (_)=>const Signin());
       case '/HomePage':
         return CupertinoPageRoute(builder: (_)=> const HomePage());
-     /* case '/DriverDashboard':
-        return CupertinoPageRoute(builder: (_)=> const DriverDashboard());
-      case '/MechanicDashboard':
-        return CupertinoPageRoute(builder: (_)=> const MechanicDashboard());*/
+    // case '/DriverDashboard':
+    //   return CupertinoPageRoute(builder: (_)=> const DriverDashboard());
+    // case '/MechanicDashboard':
+    //   return CupertinoPageRoute(builder: (_)=> const MechanicDashboard());
       default:
         return _errorRoute();
     }
+
   }
   static Route<dynamic> _errorRoute(){
     return MaterialPageRoute(builder: (_){
