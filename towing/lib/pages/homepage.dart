@@ -1,4 +1,5 @@
 import 'package:Tower/model/user_model.dart';
+import 'package:Tower/pages/about_page.dart';
 import 'package:Tower/pages/contact%20_information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -151,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.black,
                 ),
                 title: const Text(
-                  'General Settings',
+                  'Settings',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -163,29 +164,6 @@ class _HomePageState extends State<HomePage> {
                   // ...
                   // Then close the drawer
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
-                },
-              ),
-              const Divider(
-                thickness: 2,
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.person_outline,
-                  color: Colors.black,
-                ),
-                title: const Text(
-                  'Account Settings',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
                 },
               ),
               const Divider(
@@ -230,7 +208,8 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage()));
+                  //Navigator.pop(context);
                 },
               ),
               const Divider(

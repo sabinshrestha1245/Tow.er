@@ -1,4 +1,4 @@
-import 'package:Tower/mechanic_dashboard.dart';
+import 'package:Tower/mechanic/mechanic_dashboard.dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../authentication/auth.dart';
-import '../driver_dashboard.dart';
+import '../driver/driver_dashboard.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);

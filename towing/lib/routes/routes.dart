@@ -1,5 +1,5 @@
-import 'package:Tower/driver_dashboard.dart';
-import 'package:Tower/mechanic_dashboard.dart';
+import 'package:Tower/driver/driver_dashboard.dart';
+import 'package:Tower/mechanic/mechanic_dashboard.dart';
 import 'package:Tower/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
