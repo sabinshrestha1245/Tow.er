@@ -1,4 +1,5 @@
 import 'package:Tower/driver/gird_driver.dart';
+import 'package:Tower/driver_check_history.dart';
 import 'package:Tower/model/user_model.dart';
 import 'package:Tower/pages/generalsetting.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -40,6 +41,20 @@ class _DriverDashboardState extends State<DriverDashboard> {
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
+  Widget tapped(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        return DriverDashboard();
+        break;
+
+      case 1:
+        return DriverCheckHistory();
+        break;
+
+      default:
+        return SettingsScreen();
+    }
+  }
 
 
   @override
@@ -116,7 +131,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   ),
                 ),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DriverDashboard())),
+                    MaterialPageRoute(builder: (context) => const DriverDashboard())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer
@@ -190,9 +205,9 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.pop(context);
                 },
               ),
-              const Divider(
+              /*const Divider(
                 thickness: 2,
-              ),
+              ),*/
               /*ListTile(
                 leading: const Icon(
                   Icons.chat_bubble_outline,
@@ -343,6 +358,14 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
+                      Text(
+                        "${loggedInUser.role}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),
                     ],
                   ),
                 ),
@@ -378,21 +401,32 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 backgroundColor: Colors.red,
                 textColor: Colors.white,
                 fontSize: 16.0);
+            child: InkWell(
+                onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        tapped(context, index)),
+                  );
+            });
           }),
           items: [
             BottomNavyBarItem(
-              icon: const Icon(Icons.apps),
+              icon: const Icon(Icons.home),
               title: const Text('Home'),
               activeColor: Colors.red,
+              
             ),
             BottomNavyBarItem(
-                icon: const Icon(Icons.people),
-                title: const Text('Users'),
+                icon: const Icon(Icons.access_time_outlined),
+                title: const Text('Check History'),
                 activeColor: Colors.purpleAccent),
             BottomNavyBarItem(
                 icon: const Icon(Icons.message),
                 title: const Text('Messages'),
                 activeColor: Colors.pink),
+            
             BottomNavyBarItem(
                 icon: const Icon(Icons.settings),
                 title: const Text('Settings'),

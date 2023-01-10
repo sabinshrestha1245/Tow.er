@@ -1,8 +1,8 @@
 import 'package:Tower/map/app_data.dart';
 import 'package:Tower/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
 
@@ -10,6 +10,7 @@ import 'routes/routes.dart';
 
 Future<void> main()  async {
   WidgetsFlutterBinding.ensureInitialized();
+  String? errorMessage;
   try{
     await Firebase.initializeApp(
       options: const FirebaseOptions(
@@ -18,10 +19,9 @@ Future<void> main()  async {
         messagingSenderId: '545883646552',
         projectId: 'towingapp-fab00',
       ),
-    );}catch(e){
-    /*if (kDebugMode) {
-      print(e.toString());
-    }*/
+    );}catch(error){
+    Fluttertoast.showToast(msg: errorMessage!);
+    print(error);
   }
   runApp(const MyApp());
 }
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           title: 'TOW-ER',
           debugShowCheckedModeBanner: false,
           //theme: rootTheme(),
-          onGenerateRoute: RouteGen.generateRoute,
+          //onGenerateRoute: RouteGen.generateRoute,
           home: SplashScreen(),
         ),);
   }

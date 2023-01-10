@@ -1,6 +1,8 @@
+import 'package:Tower/customer_details.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../edit_customer _details.dart';
 import 'setting_tile.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -29,7 +31,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.blue,
                 icon: Ionicons.person_circle_outline,
                 title: "Account",
-                onTap: () {},
+                onTap: ()
+                  => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CustomerDetails())),
+
               ),
               const SizedBox(
                 height: 10,
@@ -38,9 +43,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.green,
                 icon: Ionicons.pencil_outline,
                 title: "Edit Information",
-                onTap: () {},
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditCustomerDetails())),
               ),
-              const SizedBox(
+              /*const SizedBox(
                 height: 40,
               ),
               SettingsTile(
@@ -66,7 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Ionicons.log_out_outline,
                 title: "Logout",
                 onTap: () {},
-              ),
+              ),*/
             ],
           ),
         ),

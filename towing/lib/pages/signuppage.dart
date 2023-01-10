@@ -317,7 +317,7 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                        height: 180,
+                        height: 150,
                         child: Image.asset(
                           'assets/Logo.png',
                           fit: BoxFit.fitWidth,
@@ -332,22 +332,21 @@ class _SignUpState extends State<SignUp> {
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-
+                    SizedBox(height: 20),
+                    userRole,
                     SizedBox(height: 20),
                     firstNameField,
                     SizedBox(height: 20),
                     lastNameField,
                     SizedBox(height: 20),
-                    userRole,
-                    SizedBox(height: 20),
                     phoneField,
                     SizedBox(height: 20),
+                    emailField,
+                    SizedBox(height: 20,),
                     passwordField,
                     SizedBox(height: 20),
                     confirmPasswordField,
                     SizedBox(height: 20),
-                    emailField,
-                    SizedBox(height: 20,),
                     signUpButton,
                     SizedBox(height: 15),
                   ],
@@ -416,6 +415,7 @@ class _SignUpState extends State<SignUp> {
     userModel.lastName = lastNameEditingController.text;
     userModel.phone = phoneEditingController.text;
     userModel.role = dropdownvalue;
+    userModel.password = passwordEditingController.text;
 
     await firebaseFirestore
         .collection("users")
