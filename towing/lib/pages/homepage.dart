@@ -10,10 +10,11 @@ import 'package:Tower/pages/loginpage.dart';
 import 'package:Tower/map/googlemap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../customer_check_history.dart';
 import 'generalsetting.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const   HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -136,12 +137,8 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CustomerCheckHistory())),
               ),
               const Divider(
                 thickness: 2,

@@ -1,8 +1,8 @@
 import 'package:Tower/Services/cleaning.dart';
 import 'package:Tower/Services/refuling.dart';
 import 'package:Tower/Services/servicing.dart';
-import 'package:Tower/Services/store.dart';
 import 'package:Tower/Services/tow.dart';
+import 'package:Tower/services/shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,7 +26,7 @@ class GridDashboard extends StatelessWidget {
     img: "assets/Fuel.png",
   );
   Items item5 = Items(
-    title: "Store",
+    title: "Shipping",
     img: "assets/Logo.png",
   );
   Items item6 = Items(
@@ -34,38 +34,7 @@ class GridDashboard extends StatelessWidget {
     img: "assets/Logo.png",
   );
 
-  /*Widget tapped(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Tow()));
-        break;
 
-      case 1:
-
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Servicing()));
-        break;
-
-      case 2:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Cleaning()));
-        break;
-
-      case 3:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Refuling()));
-        break;
-      case 4:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Store()));
-        break;
-
-      default:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Repair()));
-    }
-  }
-*/
   Widget tapped(BuildContext context, int index) {
     switch (index) {
       case 0:
@@ -85,7 +54,7 @@ class GridDashboard extends StatelessWidget {
         break;
 
       case 4:
-        return Store();
+        return Shipping();
         break;
 
       default:

@@ -118,7 +118,7 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                   ),
                 ),
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage())),
+                    MaterialPageRoute(builder: (context) => const MechanicDashboard())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer

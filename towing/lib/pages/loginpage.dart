@@ -2,7 +2,7 @@ import 'package:Tower/mechanic/mechanic_dashboard.dart';
 import 'package:Tower/pages/homepage.dart';
 import 'package:Tower/pages/reset_password.dart';
 import 'package:Tower/pages/signuppage.dart';
-import 'package:Tower/phone_login.dart';
+import 'package:Tower/pages/phone_login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -217,9 +217,9 @@ class SigninState extends State<Signin> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   // Customer Dashboard
-                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Customer")
+                 FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Customer")
                   .get().then((value) =>Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomePage())) ),
+                  MaterialPageRoute(builder: (context) => HomePage())) ),
                   // Driver Dashboard
                   FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Driver")
                   .get().then((value) =>Navigator.of(context).pushReplacement(
@@ -231,7 +231,7 @@ class SigninState extends State<Signin> {
 
 
           // Add code here to check if the user is a customer, driver or mechanic.
-                  /*Navigator.of(context).pushReplacement(
+                 /* Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => HomePage())),*/
 
                 });
