@@ -3,7 +3,6 @@ import 'package:Tower/map/app_data.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:geocoding/geocoding.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
@@ -38,5 +37,6 @@ class AssistantMethods{
     Provider.of<AppData>(context, listen: false ). updatePickUpLocationAddress(userPickUpAddress);
     return placeAddress;
     print(placeAddress);
+
   }
 }

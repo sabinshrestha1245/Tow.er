@@ -16,38 +16,36 @@ class _TowState extends State<Tow> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              /*Container(
-          decoration: BoxDecoration(
-          color: Colors.cyan,
-              borderRadius: BorderRadius.circular(12)),
-          padding: EdgeInsets.all(12),
-          //alignment: Alignment.centerLeft,
-          child: TextField(
-            keyboardType: TextInputType.text,
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              hintText: 'Set your Location',
-              labelText: 'Set Your Location',
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                //borderSide: const BorderSide(width: 0, style: BorderStyle.none)
-              ),
-              suffixIcon: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.location_pin),
-              ),
+        child: Column(
+          children: [
+            /*Container(
+        decoration: BoxDecoration(
+        color: Colors.cyan,
+            borderRadius: BorderRadius.circular(12)),
+        padding: EdgeInsets.all(12),
+        //alignment: Alignment.centerLeft,
+        child: TextField(
+          keyboardType: TextInputType.text,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: 'Set your Location',
+            labelText: 'Set Your Location',
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.black,
             ),
-          ),),*/
-              Container(height: 800, child: MapElse()),
-            ],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              //borderSide: const BorderSide(width: 0, style: BorderStyle.none)
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.location_pin),
+            ),
           ),
+        ),),*/
+            Container(height: size.height, child: MapElse()),
+          ],
         ),
       ),
     );

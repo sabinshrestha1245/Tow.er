@@ -1,4 +1,5 @@
 import 'package:Tower/map/googlemap.dart';
+import 'package:Tower/map/gitmap.dart';
 import 'package:flutter/material.dart';
 
 class Servicing extends StatefulWidget {
@@ -17,7 +18,7 @@ class _ServicingState extends State<Servicing> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(height: 800, child: MapRepair()),
+            Container(height: 800, child: GitMap()),
           ],
         ),
       ),

@@ -19,6 +19,8 @@ class MapSampleState extends State<MapElse> {
   final Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController? _newGoogleMapController;
 
+  // static const LatLng PickUpPoint= LatLng(27.684451129981866, 85.31695593148471);
+
   LocationPermission? _locationPermission;
   var geoLocator = Geolocator();
   Position? userCurrentPosition;
@@ -26,7 +28,7 @@ class MapSampleState extends State<MapElse> {
   static CameraPosition? _cameraPosition;
   Set<Circle> circlesSet ={};
   LatLng? onCameraMoveEndLatLng;
-  bool isPinMarkerVisible = false;
+  bool isPinMarkerVisible = true;
   Uint8List pickUpMarker = Uint8List.fromList([]);
 
   checkIfLocationPermissionAllowed() async {
@@ -37,7 +39,7 @@ class MapSampleState extends State<MapElse> {
   }
   void _getUserLocation() async {
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+        desiredAccuracy: LocationAccuracy.high);
     userCurrentPosition = position;
     setState(() {
       _initialPosition =
@@ -62,12 +64,22 @@ class MapSampleState extends State<MapElse> {
   void _getPinnedAddress() async{
     await AssistantMethods.pickOriginPositionOnMap(onCameraMoveEndLatLng!, context);
   }
+  void _getMarker() async{
+  pickUpMarker = await AssistantMethods.getPickMarker(userPickUpMarker,context);
+  setState(() {
+
+  }
+  );
+}
 
   @override
   void initState() {
     checkIfLocationPermissionAllowed();
     _getUserLocation();
+    _getMarker();
     super.initState();
+
+
   }
 
   @override
@@ -98,12 +110,14 @@ class MapSampleState extends State<MapElse> {
               circles: circlesSet,
               initialCameraPosition: _cameraPosition!,
 
+
               onCameraMove: (position) async {
                 if(isPinMarkerVisible){
                   onCameraMoveEndLatLng = await pickLocationOnMap(position);
                   print(onCameraMoveEndLatLng);
-                }
+                                  }
               },
+              // pickLat=onCameraMoveEndLatLng.latitude;
               onCameraIdle: _getPinnedAddress,
 
               onMapCreated: (GoogleMapController controller) {
@@ -122,7 +136,7 @@ class MapSampleState extends State<MapElse> {
 
             Positioned(bottom: 0.0, left: 0.0, right:0 ,
               child: Container(decoration: BoxDecoration(borderRadius: radius, color: Colors.white),
-                height: 122.0,
+                height: 166.0,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
                   child: Column(
@@ -145,39 +159,60 @@ class MapSampleState extends State<MapElse> {
                         ),
                       ),
 
-                      Container(
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 55,),
-                            TextButton(
-                              onPressed: () async{
-                                pickUpMarker = await AssistantMethods.getPickMarker(userPickUpMarker,context);
-                                setState(() {
-                                  isPinMarkerVisible = true;
-                                });
-                              },
-                              child: const Text("Pickup",
-                                style: TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold,),
-                              ),
-                            ),
-                            Expanded(
-                              child:
-                              TextButton(
-                                onPressed: () async{
-                                  pickUpMarker = await AssistantMethods.getDropMarker(userPickUpMarker,context);
-                                  setState(() {
-                                    isPinMarkerVisible = true;
-                                  });
-                                },
-                                child: const Text("Destination",
-                                  style: TextStyle(fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ),
-                          ],
+                      // Container(
+                      //   child: Row(
+                      //     children: [
+                      //       const SizedBox(width: 55,),
+                      //       TextButton(
+                      //         onPressed: () async{
+                      //           pickUpMarker = await AssistantMethods.getPickMarker(userPickUpMarker,context);
+                      //           setState(() {
+                      //             isPinMarkerVisible = true;
+                      //
+                      //
+                      //               const Marker(
+                      //                 markerId: MarkerId("Pickup point"),
+                      //                 // position : _getPinnedAddress!,
+                      //               );
+                      //
+                      //
+                      //           }
+                      //           );
+                      //         },
+                      //         child: const Text("Pickup",
+                      //           style: TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold,),
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //         child:
+                      //         TextButton(
+                      //           onPressed: () async{
+                      //             pickUpMarker = await AssistantMethods.getDropMarker(userPickUpMarker,context);
+                      //             setState(() {
+                      //               isPinMarkerVisible = true;
+                      //             });
+                      //           },
+                      //           child: const Text("Destination",
+                      //             style: TextStyle(fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
+                      //           ),
+                      //         )
+                      //
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      TextButton(
+                        onPressed: () async{
+                          pickUpMarker = await AssistantMethods.getPickMarker(userPickUpMarker,context);
+                          setState(() {
+                          }
+                          );
+                        },
+                        child: const Text("Continue",
+                          style: TextStyle(fontSize: 16, color: Colors.green, fontWeight: FontWeight.bold,),
                         ),
                       ),
-                                          ],
+                    ],
                   ),
                 ),
               ),
