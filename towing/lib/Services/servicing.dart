@@ -1,3 +1,4 @@
+import 'package:Tower/map/gitmap.dart';
 import 'package:Tower/map/googlemap.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _ServicingState extends State<Servicing> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(height: size.height, child: MapRepair()),
+            Container(height: size.height, child: GitMap()),
           ],
         ),
       ),
