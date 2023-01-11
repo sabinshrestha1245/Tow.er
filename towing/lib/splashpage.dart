@@ -1,4 +1,3 @@
-/*
 import 'package:Tower/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,46 +20,42 @@ class SplashPageState extends State<SplashPage> {
     if (value == "Customer") {
       await storage.read(key: "role");
       Navigator.pushNamed(context, "/HomePage");
-    */
-/*  Navigator.pushAndRemoveUntil(
+  /*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const HomePage()),
-          (route) => false);*//*
+          (route) => false);*/
 
 
       //Homepages
     } else if (value == "Driver") {
       await storage.read(key: "role");
       Navigator.pushNamed(context, "/DriverDashboard");
- */
 /*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const DriverDashboard()),
-          (route) => false);*//*
+          (route) => false);*/
 
 
       //DriverDashboard
     } else if (value == "Mechanic") {
       await storage.read(key: "role");
       Navigator.pushNamed(context, "/MechanicDashboard");
- */
 /*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const MechanicDashboard()),
-          (route) => false);*//*
+          (route) => false);*/
 
 
       //MechanicDashboard
     } else {
       Navigator.pushNamed(context, "/Signin");
- */
 /*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (BuildContext context) => const Signin()),
-          (route) => false);*//*
+          (route) => false);*/
 
 
     }
@@ -79,4 +74,3 @@ class SplashPageState extends State<SplashPage> {
     );
   }
 }
-*/

@@ -4,7 +4,7 @@ import 'package:Tower/services/shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../driver_tow.dart';
+import 'driver_tow.dart';
 
 
 class GridDriver extends StatelessWidget {
