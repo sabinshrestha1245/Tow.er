@@ -1,3 +1,4 @@
+import 'package:Tower/map/gitmap.dart';
 import 'package:Tower/map/googlemap(pick+drop).dart';
 // import 'package:Tower/pages/homepage.dart';
 // import 'package:Tower/pages/signuppage.dart';
@@ -123,7 +124,7 @@ class _ServiceState extends State<Servicing> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => MapElse()),
+                MaterialPageRoute(builder: (context) => GitMap()),
                 (route) => false);
           },
           child: const Text(
