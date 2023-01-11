@@ -67,7 +67,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
         iconTheme: IconThemeData(color: Colors.green),
       ),*/
         key: _globalKey,
-        drawer: Drawer(
+        /*drawer: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
           // space to fit everything.
@@ -97,14 +97,14 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      /* SizedBox(
+                      *//* SizedBox(
                       height: 50,
                       child:
                       Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
                             ),
-                        ),*/
+                        ),*//*
 
-                      /*Text("${FirebaseAuth.instance.currentUser!.displayName}",
+                      *//*Text("${FirebaseAuth.instance.currentUser!.displayName}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -114,7 +114,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
-                      ),),*/
+                      ),),*//*
                     ],
                   )),
               ListTile(
@@ -205,10 +205,10 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.pop(context);
                 },
               ),
-              /*const Divider(
+              *//*const Divider(
                 thickness: 2,
-              ),*/
-              /*ListTile(
+              ),*//*
+              *//*ListTile(
                 leading: const Icon(
                   Icons.chat_bubble_outline,
                   color: Colors.black,
@@ -226,7 +226,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
-              ),*/
+              ),*//*
               const Divider(
                 thickness: 2,
               ),
@@ -277,7 +277,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
               ),
             ],
           ),
-        ),
+        ),*/
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -287,7 +287,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //meue or drawer
-                    Container(
+                    /*Container(
                       decoration: BoxDecoration(
                           color: Colors.cyan,
                           borderRadius: BorderRadius.circular(20)),
@@ -299,7 +299,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                         icon: const Icon(Icons.menu),
                         color: Colors.black,
                       ),
-                    ),
+                    ),*/
                     //Notification
                     Container(
                         decoration: BoxDecoration(

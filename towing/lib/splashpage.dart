@@ -19,46 +19,49 @@ class SplashPageState extends State<SplashPage> {
   readfromstorage() async {
     String? value = await storage.read(key: "role");
     if (value == "Customer") {
-      await storage.write(key: "role", value: "Customer");
+      await storage.read(key: "role");
       Navigator.pushNamed(context, "/HomePage");
-*/
-/*
-      Navigator.pushAndRemoveUntil(
+    */
+/*  Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const HomePage()),
           (route) => false);*//*
 
+
       //Homepages
     } else if (value == "Driver") {
-      await storage.write(key: "role", value: "Driver");
+      await storage.read(key: "role");
       Navigator.pushNamed(context, "/DriverDashboard");
-      */
-/* Navigator.pushAndRemoveUntil(
+ */
+/*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const DriverDashboard()),
           (route) => false);*//*
 
+
       //DriverDashboard
     } else if (value == "Mechanic") {
-      await storage.write(key: "role", value: "Mechanic");
+      await storage.read(key: "role");
       Navigator.pushNamed(context, "/MechanicDashboard");
-      */
-/* Navigator.pushAndRemoveUntil(
+ */
+/*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => const MechanicDashboard()),
           (route) => false);*//*
 
+
       //MechanicDashboard
     } else {
       Navigator.pushNamed(context, "/Signin");
-      */
-/* Navigator.pushAndRemoveUntil(
+ */
+/*Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (BuildContext context) => const Signin()),
           (route) => false);*//*
+
 
     }
   }
@@ -75,4 +78,5 @@ class SplashPageState extends State<SplashPage> {
       },
     );
   }
-}*/
+}
+*/

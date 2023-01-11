@@ -130,11 +130,6 @@ class _DriverCheckHistoryState extends State<DriverCheckHistory> {
                     padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       children: [
-                        const Text(
-                          "Completed",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        ),
                         SizedBox(
                           height: size.height,
                           width: size.width,

@@ -1,7 +1,7 @@
+import 'package:Tower/splashpage.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../splashpage.dart';
 import 'loginpage.dart';
 
 class SplashScreen extends StatefulWidget {
