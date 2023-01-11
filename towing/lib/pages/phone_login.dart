@@ -1,5 +1,5 @@
-import 'package:Tower/authentication/auth.dart';
-import 'package:Tower/pages/homepage.dart';
+import 'package:Tow.er/authentication/auth.dart';
+import 'package:Tow.er/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
 class PhoneScreen extends StatefulWidget {

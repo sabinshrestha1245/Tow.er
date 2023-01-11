@@ -9,8 +9,8 @@
 
 
     <application
-        android:label="towing"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Tow.er"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

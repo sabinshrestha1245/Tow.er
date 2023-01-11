@@ -1,6 +1,6 @@
-import 'package:Tower/pages/homepage.dart';
-import 'package:Tower/utils/showOptDialog.dart';
-import 'package:Tower/utils/showSnackbar.dart';
+import 'package:Tow.er/pages/homepage.dart';
+import 'package:Tow.er/utils/showOptDialog.dart';
+import 'package:Tow.er/utils/showSnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

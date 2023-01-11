@@ -1,5 +1,5 @@
-import 'package:Tower/map/app_data.dart';
-import 'package:Tower/pages/splash_screen.dart';
+import 'package:Tow.er/map/app_data.dart';
+import 'package:Tow.er/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
