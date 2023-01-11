@@ -35,7 +35,6 @@ class _DriverDashboardState extends State<DriverDashboard> {
       this.loggedInUser = UserModel.fromMap(value.data());
 
       setState(() {});
-
     });
   }
 
@@ -56,12 +55,11 @@ class _DriverDashboardState extends State<DriverDashboard> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      /* appBar: AppBar(
+        /* appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.green),
@@ -97,14 +95,14 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      *//* SizedBox(
+                      */ /* SizedBox(
                       height: 50,
                       child:
                       Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
                             ),
-                        ),*//*
+                        ),*/ /*
 
-                      *//*Text("${FirebaseAuth.instance.currentUser!.displayName}",
+                      */ /*Text("${FirebaseAuth.instance.currentUser!.displayName}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -114,7 +112,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
-                      ),),*//*
+                      ),),*/ /*
                     ],
                   )),
               ListTile(
@@ -205,10 +203,10 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.pop(context);
                 },
               ),
-              *//*const Divider(
+              */ /*const Divider(
                 thickness: 2,
-              ),*//*
-              *//*ListTile(
+              ),*/ /*
+              */ /*ListTile(
                 leading: const Icon(
                   Icons.chat_bubble_outline,
                   color: Colors.black,
@@ -226,7 +224,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
-              ),*//*
+              ),*/ /*
               const Divider(
                 thickness: 2,
               ),
@@ -307,7 +305,13 @@ class _DriverDashboardState extends State<DriverDashboard> {
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Auth().signOut();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Signin()));
+                            },
                             icon: const Icon(
                               Icons.notifications,
                               color: Colors.black,
@@ -328,8 +332,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                             textStyle: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w600
-                            )),
+                                fontWeight: FontWeight.w600)),
                       ),
                       const SizedBox(
                         height: 8,
@@ -401,14 +404,12 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 backgroundColor: Colors.red,
                 textColor: Colors.white,
                 fontSize: 16.0);
-            child: InkWell(
-                onTap: () {
+            child:
+            InkWell(onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        tapped(context, index)),
-                  );
+                context,
+                MaterialPageRoute(builder: (context) => tapped(context, index)),
+              );
             });
           }),
           items: [
@@ -416,7 +417,6 @@ class _DriverDashboardState extends State<DriverDashboard> {
               icon: const Icon(Icons.home),
               title: const Text('Home'),
               activeColor: Colors.red,
-              
             ),
             BottomNavyBarItem(
                 icon: const Icon(Icons.access_time_outlined),
@@ -426,13 +426,11 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 icon: const Icon(Icons.message),
                 title: const Text('Messages'),
                 activeColor: Colors.pink),
-            
             BottomNavyBarItem(
                 icon: const Icon(Icons.settings),
                 title: const Text('Settings'),
                 activeColor: Colors.blue),
           ],
-        )
-    );
+        ));
   }
 }
