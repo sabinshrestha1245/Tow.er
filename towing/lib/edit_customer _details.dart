@@ -90,10 +90,41 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
 
                 ),
                 buildTextField("First Name", "Ram", false),
-                buildTextField("First Name", "Ram", false),
-                buildTextField("First Name", "Ram", false),
-                buildTextField("First Name", "Ram", false),
-                buildTextField("First Name", "Ram", false),
+                buildTextField("Second Name", "Shrestha", false),
+                buildTextField("Email", "ramshrestha@gmail.com", false),
+                buildTextField("Password", "*******", true),
+                buildTextField("Phone Number", "9810234567", false),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(onPressed: () {},
+                        child: Text('CANCEL', style: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          color: Colors.black
+                        ),),
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                      ),
+                    ),
+                    ElevatedButton(onPressed: (){
+
+                    },
+                        child: Text('SAVE', style: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          color: Colors.white
+                        ),),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                    ),)
+                  ],
+                )
+
 
 
 
@@ -151,7 +182,11 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
           suffixIcon: isPasswordTextField
               ? IconButton(
                   icon: Icon(Icons.remove_red_eye, color: Colors.grey),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      isObscurePassword = !isObscurePassword;
+                    });
+                  },
                 )
               : null,
           contentPadding: EdgeInsets.only(bottom: 5),
