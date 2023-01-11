@@ -38,13 +38,9 @@ class _SignUpState extends State<SignUp> {
     "Mechanic",
   ];
 
-
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
-
-
 
     //first name field
     final firstNameField = TextFormField(
@@ -77,7 +73,9 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     //second name field
@@ -107,7 +105,9 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     //email field
@@ -142,7 +142,9 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     final phoneField = TextFormField(
@@ -175,9 +177,10 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
-
 
     //password field
     final passwordField = TextFormField(
@@ -209,7 +212,9 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     //confirm password field
@@ -240,7 +245,9 @@ class _SignUpState extends State<SignUp> {
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
-              borderSide: const BorderSide(width: 1,)),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
         ));
 
     //signup button
@@ -265,28 +272,31 @@ class _SignUpState extends State<SignUp> {
     final userRole = SizedBox(
       // width: size.width,
       child: DropdownButtonFormField(
-       decoration:  InputDecoration(
-         prefixIcon: const Icon(Icons.person_add_alt,
-         color: Colors.black87,),
-         contentPadding: const EdgeInsets.fromLTRB(20, 15,0, 15),
-         border: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(30.0),
-             borderSide:  const BorderSide(width: 1,)),
-       ),
-          value: dropdownvalue,
-      items:
-        items.map((String items){
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
+            Icons.person_add_alt,
+            color: Colors.black87,
+          ),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 0, 15),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
+        ),
+        value: dropdownvalue,
+        items: items.map((String items) {
           return DropdownMenuItem(
             value: items,
             child: Text(items),
           );
-      }).toList(),
-      onChanged: (String? newValue){
-            setState(() {
-              dropdownvalue = newValue!;
-            });
-      },
-      /*icon: const Padding( //Icon at tail, arrow bottom is default icon
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            dropdownvalue = newValue!;
+          });
+        },
+        /*icon: const Padding( //Icon at tail, arrow bottom is default icon
       padding: EdgeInsets.only(left:20),
           child:Icon(Icons.arrow_circle_down_sharp)
       ),*/
@@ -309,48 +319,44 @@ class _SignUpState extends State<SignUp> {
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                        height: 150,
-                        child: Image.asset(
-                          'assets/Logo.png',
-                          fit: BoxFit.fitWidth,
-                        )),
-                    const Text(
-                      "Register",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    const Text(
-                      "Create a new account",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 20),
-                    userRole,
-                    SizedBox(height: 20),
-                    firstNameField,
-                    SizedBox(height: 20),
-                    lastNameField,
-                    SizedBox(height: 20),
-                    phoneField,
-                    SizedBox(height: 20),
-                    emailField,
-                    SizedBox(height: 20,),
-                    passwordField,
-                    SizedBox(height: 20),
-                    confirmPasswordField,
-                    SizedBox(height: 20),
-                    signUpButton,
-                    SizedBox(height: 15),
-                  ],
-                ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                      height: 150,
+                      child: Image.asset(
+                        'assets/Logo.png',
+                        fit: BoxFit.fitWidth,
+                      )),
+                  const Text(
+                    "Register",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const Text(
+                    "Create a new account",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 20),
+                  userRole,
+                  SizedBox(height: 20),
+                  firstNameField,
+                  SizedBox(height: 20),
+                  lastNameField,
+                  SizedBox(height: 20),
+                  phoneField,
+                  SizedBox(height: 20),
+                  emailField,
+                  SizedBox(height: 20),
+                  passwordField,
+                  SizedBox(height: 20),
+                  confirmPasswordField,
+                  SizedBox(height: 20),
+                  signUpButton,
+                  SizedBox(height: 15),
+                ],
               ),
             ),
           ),

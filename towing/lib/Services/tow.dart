@@ -1,7 +1,13 @@
 import 'package:Tower/map/googlemap(pick+drop).dart';
-import 'package:Tower/pages/homepage.dart';
-import 'package:Tower/pages/signuppage.dart';
+// import 'package:Tower/pages/homepage.dart';
+// import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
+// import 'package:Tower/authentication/auth.dart';
+// import 'package:Tower/model/user_model.dart';
+// import 'package:Tower/pages/loginpage.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class Tow extends StatefulWidget {
   const Tow({Key? key}) : super(key: key);
@@ -11,111 +17,174 @@ class Tow extends StatefulWidget {
 }
 
 class _TowState extends State<Tow> {
+  // string for displaying the error Message
+  String? errorMessage;
+
+  // editing Controller
+  final carModel = new TextEditingController();
+  final carPlateNo = new TextEditingController();
+  final remarks = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
+
+    //Car Model field
+    final carModelField = TextFormField(
+        autofocus: false,
+        controller: carModel,
+        keyboardType: TextInputType.name,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{,}$');
+          if (value!.isEmpty) {
+            return ("Car model cannot be Empty");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Min. 3 Character");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          carModel.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Car Model (Eg.-Ford F150)",
+          fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
+        ));
+
+    //carPlateNo field
+    final carPlateNoField = TextFormField(
+        autofocus: false,
+        controller: carPlateNo,
+        keyboardType: TextInputType.name,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Car Plate No. cannot be Empty");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          carPlateNo.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Car Plate No. (Eg.-A BE 1234)",
+          fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
+        ));
+
+    //remarks field
+    final remarksField = TextFormField(
+        autofocus: false,
+        controller: remarks,
+        keyboardType: TextInputType.emailAddress,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        onSaved: (value) {
+          remarks.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Remarks (Optional)",
+          fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
+        ));
+
+    //Continue button
+    final continueButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                (context),
+                MaterialPageRoute(builder: (context) => MapElse()),
+                (route) => false);
+          },
+          child: const Text(
+            "Continue",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+    );
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            /*Container(
-        decoration: BoxDecoration(
-        color: Colors.cyan,
-            borderRadius: BorderRadius.circular(12)),
-        padding: EdgeInsets.all(12),
-        //alignment: Alignment.centerLeft,
-        child: TextField(
-          keyboardType: TextInputType.text,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            hintText: 'Set your Location',
-            labelText: 'Set Your Location',
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              //borderSide: const BorderSide(width: 0, style: BorderStyle.none)
-            ),
-            suffixIcon: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.location_pin),
-            ),
-          ),
-        ),),*/
-            Container(height: size.height, child: MapElse()),
-          ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        elevation: 0,
+        title: const Text(
+          "Towing",
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
-    );
-    /*Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
+            child: Form(
               child: Column(
-                children: [
-                  */ /*Row(
-                    //crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      //shedule booking
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: EdgeInsets.all(12),
-
-                        child: Icon(
-                          Icons.calendar_today,
-                          color: Colors.black,
-                        ),
-                      )
-                    ],
-                  ),
+                children: <Widget>[
                   SizedBox(
-                    height: 10,
+                      height: 115,
+                      child: Image.asset(
+                        'assets/Logo.png',
+                        fit: BoxFit.fitWidth,
+                      )),
+                  SizedBox(width: 10, height: 20),
+                  const Text(
+                    "Please Enter The Following",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-
-                  //search bar
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.cyan,
-                        borderRadius: BorderRadius.circular(12)),
-                    padding: EdgeInsets.all(12),
-                    //alignment: Alignment.centerLeft,
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'Set your Location',
-                        labelText: 'Set Your Location',
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.black,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          //borderSide: const BorderSide(width: 0, style: BorderStyle.none)
-                        ),
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.location_pin),
-                        ),
-                      ),
-                    ),
-                  ),*/ /*
-                  MapElse()
+                  SizedBox(width: 45),
+                  const Text(
+                    "Details",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 20),
+                  carModelField,
+                  SizedBox(height: 20),
+                  carPlateNoField,
+                  SizedBox(height: 20),
+                  remarksField,
+                  SizedBox(height: 20),
+                  continueButton,
+                  SizedBox(height: 15),
                 ],
               ),
             ),
           ),
         ),
       ),
-    );*/
+    );
   }
 }
