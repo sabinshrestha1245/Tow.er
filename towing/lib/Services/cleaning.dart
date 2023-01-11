@@ -29,7 +29,6 @@ class _CleanState extends State<Cleaning> {
   String dropdownvalue = 'Full';
   var items = [
     "Full",
-    "Hand Wash",
     "Express",
     "Flex",
   ];
