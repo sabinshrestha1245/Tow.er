@@ -13,10 +13,10 @@ class Refuling extends StatefulWidget {
   const Refuling({Key? key}) : super(key: key);
 
   @override
-  State<Refuling> createState() => _TowState();
+  State<Refuling> createState() => _RefuelState();
 }
 
-class _TowState extends State<Refuling> {
+class _RefuelState extends State<Refuling> {
   // string for displaying the error Message
   String? errorMessage;
 
@@ -29,7 +29,7 @@ class _TowState extends State<Refuling> {
   var items = [
     "Petrol",
     "Diesel",
-    "Electric",
+    // "Electric",
   ];
 
   @override
@@ -71,7 +71,7 @@ class _TowState extends State<Refuling> {
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Car Plate No. cannot be Empty");
+            return ("Field cannot be Empty");
           }
           return null;
         },
@@ -81,7 +81,7 @@ class _TowState extends State<Refuling> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Car Plate No. (Eg.-A BE 1234)",
+          hintText: "Litre",
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
@@ -103,7 +103,7 @@ class _TowState extends State<Refuling> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Remarks (Optional)",
+          hintText: "Price ",
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
