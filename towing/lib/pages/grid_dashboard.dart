@@ -6,7 +6,7 @@ import 'package:Tower/services/shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Services/repair.dart';
+import '../Services/repairing.dart';
 
 class GridDashboard extends StatelessWidget {
   Items item1 = Items(
@@ -30,10 +30,9 @@ class GridDashboard extends StatelessWidget {
     img: "assets/Logo.png",
   );
   Items item6 = Items(
-    title: "Repair",
+    title: "Repairing",
     img: "assets/Logo.png",
   );
-
 
   Widget tapped(BuildContext context, int index) {
     switch (index) {
@@ -58,7 +57,7 @@ class GridDashboard extends StatelessWidget {
         break;
 
       default:
-        return Repair();
+        return Repairing();
     }
   }
 

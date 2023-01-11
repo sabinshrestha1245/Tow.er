@@ -1,22 +1,26 @@
 import 'dart:async';
+import 'package:Tower/Services/tow.dart';
+import 'package:Tower/map/Dropoff(map).dart';
 import 'package:Tower/map/app_data.dart';
 import 'package:Tower/map/assistant_methods.dart';
 import 'package:Tower/map/global.dart';
-import 'package:Tower/map/location_services.dart';
+// import 'package:Tower/map/location_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-class MapRepair extends StatefulWidget {
+class PickMap extends StatefulWidget {
   @override
-  State<MapRepair> createState() => MapSampleState();
+  State<PickMap> createState() => MapSampleState();
 }
 
-class MapSampleState extends State<MapRepair> {
+class MapSampleState extends State<PickMap> {
   final Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController? _newGoogleMapController;
+
+  // static const LatLng PickUpPoint= LatLng(27.684451129981866, 85.31695593148471);
 
   LocationPermission? _locationPermission;
   var geoLocator = Geolocator();
@@ -25,7 +29,7 @@ class MapSampleState extends State<MapRepair> {
   static CameraPosition? _cameraPosition;
   Set<Circle> circlesSet = {};
   LatLng? onCameraMoveEndLatLng;
-  bool isPinMarkerVisible = false;
+  bool isPinMarkerVisible = true;
   Uint8List pickUpMarker = Uint8List.fromList([]);
 
   checkIfLocationPermissionAllowed() async {
@@ -37,7 +41,7 @@ class MapSampleState extends State<MapRepair> {
 
   void _getUserLocation() async {
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+        desiredAccuracy: LocationAccuracy.high);
     userCurrentPosition = position;
     setState(() {
       _initialPosition =
@@ -66,10 +70,17 @@ class MapSampleState extends State<MapRepair> {
         onCameraMoveEndLatLng!, context);
   }
 
+  void _getMarker() async {
+    pickUpMarker =
+        await AssistantMethods.getPickMarker(userPickUpMarker, context);
+    setState(() {});
+  }
+
   @override
   void initState() {
     checkIfLocationPermissionAllowed();
     _getUserLocation();
+    _getMarker();
     super.initState();
   }
 
@@ -107,6 +118,7 @@ class MapSampleState extends State<MapRepair> {
                     zoomGesturesEnabled: true,
                     circles: circlesSet,
                     initialCameraPosition: _cameraPosition!,
+
                     onCameraMove: (position) async {
                       if (isPinMarkerVisible) {
                         onCameraMoveEndLatLng =
@@ -114,7 +126,9 @@ class MapSampleState extends State<MapRepair> {
                         print(onCameraMoveEndLatLng);
                       }
                     },
+                    // pickLat=onCameraMoveEndLatLng.latitude;
                     onCameraIdle: _getPinnedAddress,
+
                     onMapCreated: (GoogleMapController controller) {
                       _controllerGoogleMap.complete(controller);
                       _newGoogleMapController = controller;
@@ -141,7 +155,7 @@ class MapSampleState extends State<MapRepair> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: radius, color: Colors.white),
-                      height: 122.0,
+                      height: 166.0,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 10.0),
@@ -183,25 +197,42 @@ class MapSampleState extends State<MapRepair> {
                               ),
                             ),
                             const SizedBox(
-                              height: 4.0,
+                              width: 55,
                             ),
                             TextButton(
-                              onPressed: () async {
-                                pickUpMarker =
-                                    await AssistantMethods.getPickMarker(
-                                        userPickUpMarker, context);
-                                setState(() {
-                                  isPinMarkerVisible = true;
-                                });
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    (context),
+                                    MaterialPageRoute(
+                                        builder: (context) => Tow()),
+                                    (route) => false);
                               },
                               child: const Text(
-                                "Pick Place on map",
+                                "Back To Details",
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 16,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            )
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    (context),
+                                    MaterialPageRoute(
+                                        builder: (context) => DropMap()),
+                                    (route) => false);
+                              },
+                              child: const Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),

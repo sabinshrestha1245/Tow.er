@@ -1,4 +1,4 @@
-import 'package:Tower/map/googlemap(pick+drop).dart';
+import 'package:Tower/map/Pickup(map).dart';
 // import 'package:Tower/pages/homepage.dart';
 // import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,7 @@ class _TowState extends State<Tow> {
     final remarksField = TextFormField(
         autofocus: false,
         controller: remarks,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         onSaved: (value) {
@@ -122,7 +122,7 @@ class _TowState extends State<Tow> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => MapElse()),
+                MaterialPageRoute(builder: (context) => PickMap()),
                 (route) => false);
           },
           child: const Text(

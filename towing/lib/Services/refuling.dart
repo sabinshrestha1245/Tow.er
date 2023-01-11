@@ -1,4 +1,4 @@
-import 'package:Tower/map/googlemap(pick+drop).dart';
+import 'package:Tower/map/Pickup(map).dart';
 // import 'package:Tower/pages/homepage.dart';
 // import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +66,7 @@ class _RefuelState extends State<Refuling> {
     final litreField = TextFormField(
         autofocus: false,
         controller: litreEditingController,
-        keyboardType: TextInputType.name,
+        keyboardType: TextInputType.number,
         cursorColor: Colors.black,
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         validator: (value) {
@@ -94,7 +94,7 @@ class _RefuelState extends State<Refuling> {
     final priceField = TextFormField(
         autofocus: false,
         controller: priceEditingController,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.number,
         cursorColor: Colors.black,
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         onSaved: (value) {
@@ -123,7 +123,7 @@ class _RefuelState extends State<Refuling> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => MapElse()),
+                MaterialPageRoute(builder: (context) => PickMap()),
                 (route) => false);
           },
           child: const Text(

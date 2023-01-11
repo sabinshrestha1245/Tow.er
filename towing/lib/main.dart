@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'TOW-ER',
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(primarySwatch: Colors.cyan),
+
           //theme: rootTheme(),
           //onGenerateRoute: RouteGen.generateRoute,
           home: SplashScreen(),

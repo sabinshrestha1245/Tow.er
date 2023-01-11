@@ -1,5 +1,4 @@
-import 'package:Tower/map/gitmap.dart';
-import 'package:Tower/map/googlemap(pick+drop).dart';
+import 'package:Tower/map/Pickup(map).dart';
 // import 'package:Tower/pages/homepage.dart';
 // import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -22,22 +21,23 @@ class _ServiceState extends State<Servicing> {
   String? errorMessage;
 
   // editing Controller
+  final carModelEditingController = new TextEditingController();
+  final carPlateNoEditingController = new TextEditingController();
+  final dateEditingController = new TextEditingController();
+  final remarksEditingController = new TextEditingController();
 
-  final litreEditingController = new TextEditingController();
-  final priceEditingController = new TextEditingController();
-
-  String dropdownvalue = 'Petrol';
+  String dropdownvalue = 'Interim';
   var items = [
-    "Petrol",
-    "Diesel",
-    // "Electric",
+    "Interim",
+    "Full",
+    "Major",
   ];
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
 
-    final typeOfFuel = SizedBox(
+    final typeOfServicing = SizedBox(
       // width: size.width,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
@@ -63,26 +63,20 @@ class _ServiceState extends State<Servicing> {
       ),
     );
 
-    //litreEditingController field
-    final litreField = TextFormField(
+    //Car Model field
+    final carModelField = TextFormField(
         autofocus: false,
-        controller: litreEditingController,
+        controller: carModelEditingController,
         keyboardType: TextInputType.name,
         cursorColor: Colors.black,
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return ("Field cannot be Empty");
-          }
-          return null;
-        },
         onSaved: (value) {
-          litreEditingController.text = value!;
+          carModelEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Litre",
+          hintText: "Car Model (Eg.-Ford F150)",
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
@@ -91,20 +85,116 @@ class _ServiceState extends State<Servicing> {
               )),
         ));
 
-    //priceEditingController field
-    final priceField = TextFormField(
+    //carPlateNoEditingController field
+    final carPlateNoField = TextFormField(
         autofocus: false,
-        controller: priceEditingController,
-        keyboardType: TextInputType.emailAddress,
+        controller: carPlateNoEditingController,
+        keyboardType: TextInputType.name,
         cursorColor: Colors.black,
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Car Plate No. cannot be Empty");
+          }
+          return null;
+        },
         onSaved: (value) {
-          priceEditingController.text = value!;
+          carPlateNoEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Price ",
+          hintText: "Car Plate No. (Eg.-A BE 1234)",
+          fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                width: 1,
+              )),
+        ));
+
+    DateTime _dateTime = DateTime.now();
+
+    void _showDatePicker() {
+      showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2050),
+      ).then((value) {
+        setState(() {
+          _dateTime = value!;
+        });
+      });
+    }
+
+    //date Button
+    final dateButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Color.fromARGB(255, 170, 248, 248),
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: _showDatePicker,
+          child: Text(
+            'Date: ' +
+                _dateTime.year.toString() +
+                "/" +
+                _dateTime.month.toString() +
+                "/" +
+                _dateTime.day.toString(),
+            style: TextStyle(fontSize: 16, color: Colors.black45),
+          )),
+    );
+
+    //show timepicker method
+
+    TimeOfDay _timeOfDay = TimeOfDay.now();
+    void _showTimePicker() {
+      showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      ).then((value) {
+        setState(() {
+          _timeOfDay = value!;
+          print(_timeOfDay);
+        });
+      });
+    }
+
+    //time Button
+    final timeButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Color.fromARGB(255, 170, 248, 248),
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          onPressed: _showTimePicker,
+          child: Text(
+            'Time: ' +
+                _timeOfDay.hour.toString() +
+                ":" +
+                _timeOfDay.minute.toString(),
+            style: TextStyle(fontSize: 16, color: Colors.black45),
+          )),
+    );
+
+    //remarksEditingController field
+    final remarksField = TextFormField(
+        autofocus: false,
+        controller: remarksEditingController,
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black.withOpacity(0.9)),
+        onSaved: (value) {
+          remarksEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Remarks (Optional)",
           fillColor: const Color.fromRGBO(217, 217, 217, 0.56),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
@@ -124,7 +214,7 @@ class _ServiceState extends State<Servicing> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => GitMap()),
+                MaterialPageRoute(builder: (context) => PickMap()),
                 (route) => false);
           },
           child: const Text(
@@ -173,11 +263,17 @@ class _ServiceState extends State<Servicing> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20),
-                  typeOfFuel,
+                  dateButton,
                   SizedBox(height: 20),
-                  litreField,
+                  timeButton,
                   SizedBox(height: 20),
-                  priceField,
+                  typeOfServicing,
+                  SizedBox(height: 20),
+                  carModelField,
+                  SizedBox(height: 20),
+                  carPlateNoField,
+                  SizedBox(height: 20),
+                  remarksField,
                   SizedBox(height: 20),
                   continueButton,
                   SizedBox(height: 15),
