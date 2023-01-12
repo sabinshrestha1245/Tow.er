@@ -1,10 +1,9 @@
-import 'package:Tow.er/Services/cleaning.dart';
-import 'package:Tow.er/Services/refuling.dart';
-import 'package:Tow.er/Services/servicing.dart';
+import 'package:Tow.er/Customer_Services/Cus_cleaning.dart';
+import 'package:Tow.er/Customer_Services/Cus_refuling.dart';
+import 'package:Tow.er/Customer_Services/Cus_servicing.dart';
+import 'package:Tow.er/Customer_Services/Cus_repairing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../Services/repairing.dart';
 
 class GridMechanic extends StatelessWidget {
   Items item1 = Items(
@@ -23,7 +22,6 @@ class GridMechanic extends StatelessWidget {
     title: "Repair",
     img: "assets/Logo.png",
   );
-
 
   Widget tapped(BuildContext context, int index) {
     switch (index) {

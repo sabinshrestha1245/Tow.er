@@ -1,12 +1,11 @@
-import 'package:Tow.er/Services/cleaning.dart';
-import 'package:Tow.er/Services/refuling.dart';
-import 'package:Tow.er/Services/servicing.dart';
-import 'package:Tow.er/Services/tow.dart';
-import 'package:Tow.er/services/shipping.dart';
+import 'package:Tow.er/Customer_Services/Cus_cleaning.dart';
+import 'package:Tow.er/Customer_Services/Cus_refuling.dart';
+import 'package:Tow.er/Customer_Services/Cus_servicing.dart';
+import 'package:Tow.er/Customer_Services/Cus_tow.dart';
+import 'package:Tow.er/Customer_Services/Cus_shipping.dart';
+import 'package:Tow.er/Customer_Services/Cus_repairing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../Services/repairing.dart';
 
 class GridDashboard extends StatelessWidget {
   Items item1 = Items(
