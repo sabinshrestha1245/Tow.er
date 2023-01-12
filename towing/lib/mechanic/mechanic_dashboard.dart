@@ -12,8 +12,6 @@ import 'package:Tow.er/pages/loginpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class MechanicDashboard extends StatefulWidget {
   const MechanicDashboard({Key? key}) : super(key: key);
 
@@ -37,7 +35,6 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
       this.loggedInUser = UserModel.fromMap(value.data());
 
       setState(() {});
-
     });
   }
 
@@ -48,7 +45,7 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      /* appBar: AppBar(
+        /* appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.green),
@@ -63,11 +60,10 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.cyan),
+                  decoration: const BoxDecoration(color: Colors.white60),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-
                       Text(
                         "${loggedInUser.firstName} ${loggedInUser.lastName}",
                         style: GoogleFonts.openSans(
@@ -117,8 +113,10 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MechanicDashboard())),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MechanicDashboard())),
                 // Update the state of the app
                 // ...
                 // Then close the drawer
@@ -166,7 +164,10 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsScreen()));
                 },
               ),
               const Divider(
@@ -210,7 +211,10 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                 ),
                 onTap: () {
                   // Update the state of the app
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
               ),
@@ -276,7 +280,7 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                     //meue or drawer
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.cyan,
+                          color: Colors.white60,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.all(5),
                       child: IconButton(
@@ -290,7 +294,7 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                     //Notification
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.cyan,
+                            color: Colors.white60,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
@@ -315,8 +319,7 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                             textStyle: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w600
-                            )),
+                                fontWeight: FontWeight.w600)),
                       ),
                       const SizedBox(
                         height: 8,
@@ -369,7 +372,6 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                 ),
 
                 GridMechanic(),
-
               ],
             ),
           ),
@@ -407,8 +409,6 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                 title: const Text('Settings'),
                 activeColor: Colors.blue),
           ],
-        )
-    );
+        ));
   }
 }
-

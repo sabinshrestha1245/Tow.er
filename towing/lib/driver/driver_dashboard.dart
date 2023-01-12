@@ -73,7 +73,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.cyan),
+                  decoration: const BoxDecoration(color: Colors.white60),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -286,7 +286,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                     //meue or drawer
                     /*Container(
                       decoration: BoxDecoration(
-                          color: Colors.cyan,
+                          color: Colors.white60,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.all(5),
                       child: IconButton(
@@ -300,7 +300,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                     //Notification
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.cyan,
+                            color: Colors.white60,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
@@ -428,7 +428,6 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 title: const Text('Settings'),
                 activeColor: Colors.blue),
           ],
-        )
-    );
+        ));
   }
 }
