@@ -1,9 +1,9 @@
-/*
-import 'package:Tower/driver/driver_dashboard.dart';
-import 'package:Tower/mechanic/mechanic_dashboard.dart';
-import 'package:Tower/pages/splash_screen.dart';
+import 'package:Tow.er/splashpage.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../driver/driver_dashboard.dart';
+import '../mechanic/mechanic_dashboard.dart';
 import '../pages/homepage.dart';
 import '../pages/loginpage.dart';
 
@@ -11,7 +11,7 @@ class RouteGen {
   static Route<dynamic> generateRoute(RouteSettings setting) {
     switch (setting.name) {
       case '/':
-        return CupertinoPageRoute(builder: (_) => SplashScreen());
+        return CupertinoPageRoute(builder: (_) => SplashPage());
       case '/Signin':
         return CupertinoPageRoute(builder: (_) => const Signin());
       case '/HomePage':
@@ -36,4 +36,3 @@ class RouteGen {
     });
   }
 }
-*/

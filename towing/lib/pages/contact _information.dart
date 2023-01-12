@@ -75,12 +75,72 @@ class _ContactInformationState extends State<ContactInformation> {
                             Text("Contact the following branch : "
                               ,style: GoogleFonts.lato(
                                 color: Colors.black87,
-                                fontSize: 20,
+                                fontSize: 20,fontWeight: FontWeight.bold
+
                               ),
                             ),
                           ],
                         ),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.black87,
+                            borderRadius: BorderRadius.all(Radius.circular(90)),
+                          ),
+                        ),
+                        SizedBox(width: 20,height: 80,),
+                        Text("Kathmandu(01-567686)"
+                          "\n Tow.erktm@gmail.com \n", style: GoogleFonts.lato(
+                          color: Colors.black, fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                        SizedBox(width: 20,height:80),
+                        Text("Chitwan(01-567687)"
+                            "\n Tow.erChitwan@gmail.com\n"
+                          , style: GoogleFonts.lato(
+                          color: Colors.black, fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                        SizedBox(width: 20,height:80),
+                        Text("pokhara(01-567688)"
+                            "\n Tow.erpokhara@gmail.com\n"
+                          , style: GoogleFonts.lato(
+                            color: Colors.black, fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),),
+
+                      ],
                     ),
                   ],
                 ),

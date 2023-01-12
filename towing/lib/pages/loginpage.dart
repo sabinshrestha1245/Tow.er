@@ -6,9 +6,11 @@ import 'package:Tow.er/pages/phone_login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../authentication/auth.dart';
 import '../driver/driver_dashboard.dart';
+import '../model/user_model.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class SigninState extends State<Signin> {
 
   //firebase
   final _firebaseAuth = FirebaseAuth.instance;
-  final currentUser = FirebaseAuth.instance.currentUser;
+  late final currentUser = FirebaseAuth.instance.currentUser;
 
 
 
@@ -90,6 +92,7 @@ class SigninState extends State<Signin> {
           if (!regex.hasMatch(value)) {
             return ("Enter Valid Password(Min. 6 Character)");
           }
+          return null;
         },
         onSaved: (value) {
           _passwordTextController.text = value!;
@@ -116,8 +119,10 @@ class SigninState extends State<Signin> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {
-            signIn(_emailTextController.text, _passwordTextController.text);
+          onPressed: () async {
+            User? user = await signIn(_emailTextController.text, _passwordTextController.text);
+              route(user);
+
           },
           child: Text(
             "Login",
@@ -207,34 +212,47 @@ class SigninState extends State<Signin> {
       ),
     );
   }
+  final storage = const FlutterSecureStorage();
+   route(User? user) async {
+     FirebaseFirestore.instance
+         .collection('users')
+         .doc(user!.uid)
+         .get()
+         .then((DocumentSnapshot documentSnapshot) {
+       if (documentSnapshot.exists) {
+         var data = documentSnapshot.data();
+         UserModel model = UserModel.fromMap(data);
+         if(model.role == "Customer"){
+            storage.write(key: "role",value: "Customer");
+           Navigator.of(context).pushReplacement(
+                   MaterialPageRoute(builder: (context) => HomePage()));
+         }
+         else if(model.role == "Mechanic"){
+           storage.write(key: "role",value: "Mechanic");
+           Navigator.of(context).pushReplacement(
+                   MaterialPageRoute(builder: (context) => MechanicDashboard()));
+         }
+         else{
+           storage.write(key: "role",value: "Driver");
+           Navigator.of(context).pushReplacement(
+               MaterialPageRoute(builder: (context) => DriverDashboard()));
+         }
 
-  void signIn(String email, String password) async {
-    final user = FirebaseFirestore.instance.collection("users").doc(currentUser?.uid);
+       }
+     });
+
+
+
+  }
+  Future<User?> signIn(String email, String password) async {
+
+
     if (_formKey.currentState!.validate()) {
-      try {
-        await _firebaseAuth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
-                  // Customer Dashboard
-                 FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Customer")
-                  .get().then((value) =>Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomePage())) ),
-                  // Driver Dashboard
-                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Driver")
-                  .get().then((value) =>Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => DriverDashboard())) ),
-                  // Mechanic Dashboard
-                  FirebaseFirestore.instance.collection("users").where("role", isEqualTo: "Mechanic")
-                  .get().then((value) =>Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MechanicDashboard())) ),
-
-          // Add code here to check if the user is a customer, driver or mechanic.
-                  /*Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomePage())),
-*/
-                });
-
+       try {
+        var user =  await _firebaseAuth
+            .signInWithEmailAndPassword(email: email, password: password);
+        User signinuser = user.user!;
+        return signinuser;
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":
@@ -261,6 +279,8 @@ class SigninState extends State<Signin> {
         }
         Fluttertoast.showToast(msg: errorMessage!);
         print(error.code);
+        return null;
+
       }
     }
   }

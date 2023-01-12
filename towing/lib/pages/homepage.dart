@@ -316,14 +316,14 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      Text(
-                        "${loggedInUser.role}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
+                      // Text(
+                      //   "${loggedInUser.role}",
+                      //   style: GoogleFonts.openSans(
+                      //       textStyle: const TextStyle(
+                      //           color: Colors.black,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600)),
+                      // ),
                     ],
                   ),
                 ),

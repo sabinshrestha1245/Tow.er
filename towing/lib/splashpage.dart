@@ -1,3 +1,6 @@
+import 'package:Tow.er/driver/driver_dashboard.dart';
+import 'package:Tow.er/mechanic/mechanic_dashboard.dart';
+import 'package:Tow.er/pages/homepage.dart';
 import 'package:Tow.er/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,40 +16,25 @@ class SplashPage extends StatefulWidget {
 }
 
 class SplashPageState extends State<SplashPage> {
-  @override
   final storage = const FlutterSecureStorage();
   readfromstorage() async {
     String? value = await storage.read(key: "role");
     if (value == "Customer") {
-      await storage.read(key: "role");
-      Navigator.pushNamed(context, "/HomePage");
-  /*Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage()),
-          (route) => false);*/
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomePage()));
+
 
 
       //Homepages
     } else if (value == "Driver") {
-      await storage.read(key: "role");
-      Navigator.pushNamed(context, "/DriverDashboard");
-/*Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const DriverDashboard()),
-          (route) => false);*/
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => DriverDashboard()));
 
 
       //DriverDashboard
     } else if (value == "Mechanic") {
-      await storage.read(key: "role");
-      Navigator.pushNamed(context, "/MechanicDashboard");
-/*Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const MechanicDashboard()),
-          (route) => false);*/
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => MechanicDashboard()));
 
 
       //MechanicDashboard
@@ -68,6 +56,7 @@ class SplashPageState extends State<SplashPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           readfromstorage();
+          //loading
         }
         return const Signin();
       },

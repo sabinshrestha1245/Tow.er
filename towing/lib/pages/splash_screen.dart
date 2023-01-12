@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       showLoader: true,
       loadingText: const Text("Loading..."),
-      navigator: const Signin(),
+      navigator: const SplashPage(),
       durationInSeconds: 1,
     );
   }

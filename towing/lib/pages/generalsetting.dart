@@ -53,7 +53,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.black,
                 icon: Ionicons.moon_outline,
                 title: "Theme",
-                onTap: () {},
+                onTap: () {
+                  
+                },
               ),
               const SizedBox(
                 height: 10,

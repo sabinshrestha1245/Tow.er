@@ -46,11 +46,12 @@ class MapSampleState extends State<PickMap> {
     setState(() {
       _initialPosition =
           LatLng(userCurrentPosition!.latitude, userCurrentPosition!.longitude);
-      _cameraPosition =
-          CameraPosition(target: _initialPosition as LatLng, zoom: 16.0);
-      _newGoogleMapController
-          ?.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition!));
+
     });
+    _cameraPosition =
+        CameraPosition(target: _initialPosition as LatLng, zoom: 16.0);
+    _newGoogleMapController
+        ?.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition!));
   }
 
   Future<LatLng> pickLocationOnMap(CameraPosition _onCameraMovePosition) async {
