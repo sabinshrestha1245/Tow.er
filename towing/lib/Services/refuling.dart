@@ -110,7 +110,8 @@ class _RefuelState extends State<Refuling> {
               borderSide: const BorderSide(
                 width: 1,
               )),
-        ));
+        )
+    );
 
     //Continue button
     final continueButton = Material(

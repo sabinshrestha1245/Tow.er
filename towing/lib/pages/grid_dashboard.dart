@@ -11,27 +11,27 @@ import '../Services/repairing.dart';
 class GridDashboard extends StatelessWidget {
   Items item1 = Items(
     title: "Tow",
-    img: "assets/Logo.png",
+    img: "assets/Tow.jpg",
   );
   Items item2 = Items(
-    title: "Servicing",
-    img: "assets/Logo.png",
+    title: "Shipping",
+    img: "assets/Shipping.jpg",
   );
   Items item3 = Items(
     title: "Cleaning",
-    img: "assets/Logo.png",
+    img: "assets/Cleaning.jpg",
   );
   Items item4 = Items(
-    title: "Refuling",
-    img: "assets/Fuel.png",
+    title: "Servicing",
+    img: "assets/Servicing.jpg",
   );
   Items item5 = Items(
-    title: "Shipping",
-    img: "assets/Logo.png",
+    title: "Refuling",
+    img: "assets/Refueling.jpg",
   );
   Items item6 = Items(
     title: "Repairing",
-    img: "assets/Logo.png",
+    img: "assets/Repair.jpg",
   );
 
   Widget tapped(BuildContext context, int index) {
@@ -41,7 +41,7 @@ class GridDashboard extends StatelessWidget {
         break;
 
       case 1:
-        return Servicing();
+        return Shipping();
         break;
 
       case 2:
@@ -49,11 +49,11 @@ class GridDashboard extends StatelessWidget {
         break;
 
       case 3:
-        return Refuling();
+        return Servicing();
         break;
 
       case 4:
-        return Shipping();
+        return Refuling();
         break;
 
       default:
