@@ -1,6 +1,10 @@
 import 'package:Tow.er/Customer_Services/Cus_refuling.dart';
 import 'package:Tow.er/Customer_Services/Cus_tow.dart';
 import 'package:Tow.er/Customer_Services/Cus_shipping.dart';
+import 'package:Tow.er/driver/driver_cleaning.dart';
+import 'package:Tow.er/driver/driver_refuling.dart';
+import 'package:Tow.er/driver/driver_servicing.dart';
+import 'package:Tow.er/driver/driver_shipping.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,15 +13,23 @@ import 'driver_tow.dart';
 class GridDriver extends StatelessWidget {
   Items item1 = Items(
     title: "Tow",
-    img: "assets/Logo.png",
+    img: "assets/Tow.jpg",
   );
   Items item2 = Items(
-    title: "Refuling",
-    img: "assets/Fuel.png",
+    title: "Shipping",
+    img: "assets/Shipping.jpg",
   );
   Items item3 = Items(
-    title: "Shipping",
-    img: "assets/Logo.png",
+    title: "Cleaning",
+    img: "assets/Cleaning.jpg",
+  );
+  Items item4 = Items(
+    title: "Servicing",
+    img: "assets/Servicing.jpg",
+  );
+  Items item5 = Items(
+    title: "Refueling",
+    img: "assets/Refueling.jpg",
   );
 
   Widget tapped(BuildContext context, int index) {
@@ -27,17 +39,25 @@ class GridDriver extends StatelessWidget {
         break;
 
       case 1:
-        return Refuling();
+        return DriverShipping();
+        break;
+
+      case 2:
+        return DriverCleaning();
+        break;
+
+      case 3:
+        return DriverServicing();
         break;
 
       default:
-        return Shipping();
+        return DriverRefuling();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [item1, item2, item3];
+    List<Items> myList = [item1, item2, item3, item4,item5];
     //var color = 0xff453658;
     return Flexible(
       child: GridView.count(
@@ -69,8 +89,8 @@ class GridDriver extends StatelessWidget {
                     children: <Widget>[
                       Image.asset(
                         data.img,
-                        height: 60,
-                        width: 60,
+                        height: 74,
+                        width: 74,
                       ),
                       /*const SizedBox(
                         height: 8,

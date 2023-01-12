@@ -317,9 +317,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                             ))),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 //greeting
                 Container(
                   child: Column(
@@ -344,22 +342,22 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      Text(
-                        "${loggedInUser.email}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Text(
-                        "${loggedInUser.phone}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
+                      // Text(
+                      //   "${loggedInUser.email}",
+                      //   style: GoogleFonts.openSans(
+                      //       textStyle: const TextStyle(
+                      //           color: Colors.black,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600)),
+                      // ),
+                      // Text(
+                      //   "${loggedInUser.phone}",
+                      //   style: GoogleFonts.openSans(
+                      //       textStyle: const TextStyle(
+                      //           color: Colors.black,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600)),
+                      // ),
                       // Text(
                       //   "${loggedInUser.role}",
                       //   style: GoogleFonts.openSans(
@@ -372,14 +370,14 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Text(
                   "Choose A Service",
                   style: GoogleFonts.openSans(
                       textStyle: const TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontWeight: FontWeight.w600)),
                 ),
                 /* const SizedBox(
@@ -430,6 +428,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                 title: const Text('Settings'),
                 activeColor: Colors.blue),
           ],
-        ));
+        )
+    );
   }
 }

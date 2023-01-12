@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Tow.er/Customer_Services/Cus_tow.dart';
+import 'package:Tow.er/Customer_Services/billing.dart';
 import 'package:Tow.er/map/Dropoff(map).dart';
 import 'package:Tow.er/map/Pickup(map).dart';
 import 'package:Tow.er/map/app_data.dart';
@@ -206,7 +207,7 @@ class MapSampleState extends State<DropMap> {
                                     (context),
                                     MaterialPageRoute(
                                         builder: (context) => PickMap()),
-                                    (route) => false);
+                                    (route) => true);
                               },
                               child: const Text(
                                 "Back To Details",
@@ -222,8 +223,8 @@ class MapSampleState extends State<DropMap> {
                                 Navigator.pushAndRemoveUntil(
                                     (context),
                                     MaterialPageRoute(
-                                        builder: (context) => Tow()),
-                                    (route) => false);
+                                        builder: (context) => Billing()),
+                                    (route) => true);
                               },
                               child: const Text(
                                 "Continue",

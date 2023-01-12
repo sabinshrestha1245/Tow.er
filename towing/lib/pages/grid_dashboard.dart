@@ -94,8 +94,8 @@ class GridDashboard extends StatelessWidget {
                     children: <Widget>[
                       Image.asset(
                         data.img,
-                        height: 60,
-                        width: 60,
+                        height: 74,
+                        width: 74,
                       ),
                       /*const SizedBox(
                         height: 8,

@@ -8,19 +8,15 @@ import 'package:google_fonts/google_fonts.dart';
 class GridMechanic extends StatelessWidget {
   Items item1 = Items(
     title: "Servicing",
-    img: "assets/Logo.png",
+    img: "assets/Servicing.jpg",
   );
   Items item2 = Items(
-    title: "Cleaning",
-    img: "assets/Logo.png",
+    title: "Refuling",
+    img: "assets/Refueling.jpg",
   );
   Items item3 = Items(
-    title: "Refuling",
-    img: "assets/Fuel.png",
-  );
-  Items item4 = Items(
     title: "Repair",
-    img: "assets/Logo.png",
+    img: "assets/Repair.jpg",
   );
 
   Widget tapped(BuildContext context, int index) {
@@ -30,10 +26,6 @@ class GridMechanic extends StatelessWidget {
         break;
 
       case 1:
-        return Cleaning();
-        break;
-
-      case 2:
         return Refuling();
         break;
 
@@ -44,7 +36,7 @@ class GridMechanic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [item1, item2, item3, item4];
+    List<Items> myList = [item1, item2, item3];
     //var color = 0xff453658;
     return Flexible(
       child: GridView.count(
