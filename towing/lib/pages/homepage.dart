@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Tow.er/model/user_model.dart';
 import 'package:Tow.er/pages/about_page.dart';
 import 'package:Tow.er/pages/contact%20_information.dart';
@@ -7,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:Tow.er/authentication/auth.dart';
 import 'package:Tow.er/pages/grid_dashboard.dart';
 import 'package:Tow.er/pages/loginpage.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../customer_check_history.dart';
 import 'generalsetting.dart';
 
 class HomePage extends StatefulWidget {
-  const   HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,8 +26,40 @@ class _HomePageState extends State<HomePage> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
+  late final PageController pageController;
+  ScrollController _scrollController = ScrollController();
+  int pageNo = 0;
+
+  Timer? carasouelTmer;
+
+  Timer getTimer() {
+    return Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (pageNo == 4) {
+        pageNo = 0;
+      }
+      pageController.animateToPage(
+        pageNo,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInOutCirc,
+      );
+      pageNo++;
+    });
+  }
+
   @override
   void initState() {
+    pageController = PageController(initialPage: 0, viewportFraction: 0.85);
+    carasouelTmer = getTimer();
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        showBtmAppBr = false;
+        setState(() {});
+      } else {
+        showBtmAppBr = true;
+        setState(() {});
+      }
+    });
     super.initState();
 
     FirebaseFirestore.instance
@@ -35,11 +70,23 @@ class _HomePageState extends State<HomePage> {
       this.loggedInUser = UserModel.fromMap(value.data());
 
       setState(() {});
-
     });
   }
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  bool showBtmAppBr = true;
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  List<String> images = [
+    'assets/Tow_banner.jpg',
+    'assets/Repair_banner.jpg',
+    'assets/Clraning_banner.jpg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +111,6 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-
                       Text(
                         "${loggedInUser.firstName} ${loggedInUser.lastName}",
                         style: GoogleFonts.openSans(
@@ -81,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                     /* SizedBox(
+                      /* SizedBox(
                       height: 50,
                       child:
                       Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
@@ -136,8 +182,10 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CustomerCheckHistory())),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CustomerCheckHistory())),
               ),
               const Divider(
                 thickness: 2,
@@ -159,7 +207,10 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsScreen()));
                 },
               ),
               const Divider(
@@ -180,7 +231,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   // Update the state of the app
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
               ),
@@ -204,7 +258,10 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutPage()));
                   //Navigator.pop(context);
                 },
               ),
@@ -238,9 +295,112 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: Column(
               children: [
+                SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: PageView.builder(
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      pageNo = index;
+                      setState(() {});
+                    },
+                    itemBuilder: (_, index) {
+                      return AnimatedBuilder(
+                        animation: pageController,
+                        builder: (ctx, child) {
+                          return child!;
+                        },
+                        child: SizedBox(
+                          height: 300,
+                          width: double.infinity,
+                          child: Image.asset(
+                            images[index],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: images.length,
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    3,
+                    (index) => GestureDetector(
+                      child: Container(
+                        margin: const EdgeInsets.all(2.0),
+                        child: Icon(
+                          Icons.circle,
+                          size: 12.0,
+                          color: pageNo == index
+                              ? Colors.indigoAccent
+                              : Colors.grey.shade300,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                //greeting
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Welcome",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "${loggedInUser.firstName} ${loggedInUser.lastName}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      /* Text(
+                        "${loggedInUser.email}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        "${loggedInUser.phone}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),*/
+                      // Text(
+                      //   "${loggedInUser.role}",
+                      //   style: GoogleFonts.openSans(
+                      //       textStyle: const TextStyle(
+                      //           color: Colors.black,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600)),
+                      // ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -265,78 +425,27 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => CustomerCheckHistory()));
+                            },
                             icon: const Icon(
                               Icons.notifications,
                               color: Colors.black,
                             ))),
                   ],
                 ),
-                SizedBox(
+                /*SizedBox(
                   height: 10,
-                ),
-                //greeting
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600
-                        )),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "${loggedInUser.firstName} ${loggedInUser.lastName}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Text(
-                        "${loggedInUser.email}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Text(
-                        "${loggedInUser.phone}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      // Text(
-                      //   "${loggedInUser.role}",
-                      //   style: GoogleFonts.openSans(
-                      //       textStyle: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w600)),
-                      // ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
+                ),*/
+
                 Text(
                   "Choose A Service",
                   style: GoogleFonts.openSans(
                       textStyle: const TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600)),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold)),
                 ),
                 /* const SizedBox(
                   height: 10,
@@ -347,4 +456,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
+
+  Widget buildImage(String image, int index) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        child: Image.asset(
+          image,
+          fit: BoxFit.cover,
+        ),
+      );
 }
