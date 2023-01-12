@@ -321,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     itemBuilder: (_, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
                         child: AnimatedBuilder(
                           animation: pageController,
                           builder: (ctx, child) {
@@ -351,33 +351,7 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 //greeting
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
 
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "${loggedInUser.firstName} ${loggedInUser.lastName}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                    ],
-                  ),
-                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -387,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                     //meue or drawer
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.cyan,
+                          color: Colors.white60,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.all(5),
                       child: IconButton(
@@ -398,10 +372,38 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                       ),
                     ),
+
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome",
+                            style: GoogleFonts.openSans(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "${loggedInUser.firstName} ${loggedInUser.lastName}",
+                            style: GoogleFonts.openSans(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ],
+                      ),
+                    ),
                     //Notification
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.cyan,
+                            color: Colors.white60,
                             borderRadius: BorderRadius.circular(20)),
                         padding: const EdgeInsets.all(5),
                         child: IconButton(
@@ -415,9 +417,9 @@ class _HomePageState extends State<HomePage> {
                             ))),
                   ],
                 ),
-                /*SizedBox(
-                  height: 10,
-                ),*/
+                const SizedBox(
+                  height: 30,
+                ),
 
                 Text(
                   "Choose A Service",
