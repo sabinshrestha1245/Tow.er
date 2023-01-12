@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,36 +33,58 @@ class _CustomerDetailsState extends State<CustomerDetails> {
   }
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              Text(
-                "${loggedInUser.firstName} ${loggedInUser.lastName}",
-                style: GoogleFonts.openSans(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
-              ),
-              Text(
-                "${loggedInUser.email}",
-                style: GoogleFonts.openSans(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
-              ),
-              Text(
-                "${loggedInUser.phone}",
-                style: GoogleFonts.openSans(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
-              ),
-            ],
+      body: Container(
+          width: size.width,
+          height: size.height,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Stack(
+
+              children: [Positioned(
+                 top: 50,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Name: ${loggedInUser.firstName} ${loggedInUser.lastName}",
+                      style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Email: ${loggedInUser.email}",
+                      style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Phone Number: ${loggedInUser.phone}",
+                      style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                  ],
+                ),
+              ),]
+
+            ),
           ),
             )
 

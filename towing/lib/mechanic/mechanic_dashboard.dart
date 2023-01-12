@@ -1,3 +1,4 @@
+import 'package:Tow.er/customer_check_history.dart';
 import 'package:Tow.er/mechanic/grid_mechanic.dart';
 import 'package:Tow.er/model/user_model.dart';
 import 'package:Tow.er/pages/contact%20_information.dart';
@@ -12,6 +13,8 @@ import 'package:Tow.er/pages/loginpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../customer_details.dart';
+
 class MechanicDashboard extends StatefulWidget {
   const MechanicDashboard({Key? key}) : super(key: key);
 
@@ -23,10 +26,12 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
-
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
@@ -37,9 +42,16 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
       setState(() {});
     });
   }
+  /*final List <Widget> widgetlist = [
+    MechanicDashboard(),
+    CustomerCheckHistory(),
+    CustomerDetails(),
+    MechanicDashboard(),
+   //Auth().signOut(),
+  ];*/
 
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  int _selectedIndex = 0;
+  //final pageStorageBucket bucket = pageStorageBucket();
+  //Widget
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +86,14 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                       ),
                       Text(
                         "${loggedInUser.email}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        "${loggedInUser.phone}",
                         style: GoogleFonts.openSans(
                             textStyle: const TextStyle(
                                 color: Colors.black,
@@ -141,7 +161,10 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsScreen()));
                 },
               ),
               const Divider(
@@ -168,29 +191,6 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => SettingsScreen()));
-                },
-              ),
-              const Divider(
-                thickness: 2,
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.person_outline,
-                  color: Colors.black,
-                ),
-                title: const Text(
-                  'Account Settings',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
                 },
               ),
               const Divider(
@@ -340,22 +340,6 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      Text(
-                        "${loggedInUser.phone}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      // Text(
-                      //   "${loggedInUser.role}",
-                      //   style: GoogleFonts.openSans(
-                      //       textStyle: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w600)),
-                      // ),
                     ],
                   ),
                 ),
@@ -376,39 +360,40 @@ class _MechanicDashboardState extends State<MechanicDashboard> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavyBar(
+        /*bottomNavigationBar: BottomNavyBar(
           selectedIndex: _selectedIndex,
           showElevation: true, // use this to remove appBar's elevation
           onItemSelected: (index) => setState(() {
             _selectedIndex = index;
-            Fluttertoast.showToast(
-                msg: "This is Center Short Toast",
+            //_pageController.jumpToPage(index);
+            *//*Fluttertoast.showToast(
+                msg: "Selected",
                 toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
+                gravity: ToastGravity.CENTER ,
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.red,
                 textColor: Colors.white,
-                fontSize: 16.0);
+                fontSize: 16.0);*//*
           }),
           items: [
             BottomNavyBarItem(
-              icon: const Icon(Icons.apps),
+              icon: const Icon(Icons.home),
               title: const Text('Home'),
               activeColor: Colors.red,
             ),
             BottomNavyBarItem(
-                icon: const Icon(Icons.people),
-                title: const Text('Users'),
+                icon: const Icon(Icons.cached_outlined),
+                title: const Text('Ongoing'),
                 activeColor: Colors.purpleAccent),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.message),
-                title: const Text('Messages'),
-                activeColor: Colors.pink),
             BottomNavyBarItem(
                 icon: const Icon(Icons.settings),
                 title: const Text('Settings'),
+                activeColor: Colors.pink),
+            BottomNavyBarItem(
+                icon: const Icon(Icons.exit_to_app),
+                title: const Text('Log Out'),
                 activeColor: Colors.blue),
           ],
-        ));
+        )*/);
   }
 }

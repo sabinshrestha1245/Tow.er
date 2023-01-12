@@ -1,3 +1,4 @@
+import 'package:Tow.er/pages/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,9 +19,36 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
+  String? firstName = '';
+  String? lastName = '';
+  String? email = '';
+  String? password = '';
+  String? phone = '';
+  String? userNameInput = '';
+
+  Future _getDataFromDatabase() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((snapshot) async {
+      if (snapshot.exists) {
+        setState(() {
+          firstName = snapshot.data()!['firstName'];
+          lastName = snapshot.data()!['lastName'];
+          email = snapshot.data()!['email'];
+          password = snapshot.data()!['password'];
+          phone = snapshot.data()!['phone'];
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+
+    _getDataFromDatabase();
 
     FirebaseFirestore.instance
         .collection("users")
@@ -31,6 +59,60 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
 
       setState(() {});
     });
+  }
+
+  Future _updateUserName() async {
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "firstName": userNameInput,
+    });
+  }
+
+  _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Your First Name Here'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  userNameInput = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Type Here"),
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  _updateUserName();
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -87,41 +169,96 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                 ),
                 SizedBox(
                   height: 30,
-
                 ),
-                buildTextField("First Name", "${loggedInUser.firstName}", false),
+                Text(
+                  'First Name: ' + firstName!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      _displayTextInputDialog(context);
+                    },
+                    icon: Icon(Icons.edit)),
+                Text(
+                  'last Name: ' + lastName!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                Text(
+                  'First Name: ' + firstName!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                Text(
+                  'First Name: ' + firstName!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                Text(
+                  'First Name: ' + firstName!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                /*buildTextField("First Name", "${loggedInUser.firstName}", false),
                 buildTextField("Second Name", "${loggedInUser.lastName}", false),
                 buildTextField("Email", "${loggedInUser.email}", false),
                 buildTextField("Password", "${loggedInUser.password}", true),
-                buildTextField("Phone Number", "${loggedInUser.phone}", false),
-                SizedBox(height: 30,),
+                buildTextField("Phone Number", "${loggedInUser.phone}", false),*/
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    OutlinedButton(onPressed: () {},
-                        child: Text('CANCEL', style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.black
-                        ),),
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                    OutlinedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.black),
                       ),
+                      style: OutlinedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
                     ),
-                    ElevatedButton(onPressed: (){
-
-                    },
-                        child: Text('SAVE', style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.white
-                        ),),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                    ),)
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'SAVE',
+                        style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.white),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                    )
                   ],
                 )
               ],
