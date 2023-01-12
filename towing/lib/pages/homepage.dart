@@ -28,21 +28,21 @@ class _HomePageState extends State<HomePage> {
 
   late final PageController pageController;
   ScrollController _scrollController = ScrollController();
-  int pageNo = 0;
+  int currentIndex = 0;
 
   Timer? carasouelTmer;
 
   Timer getTimer() {
     return Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (pageNo == 4) {
-        pageNo = 0;
+      if (currentIndex == 4) {
+        currentIndex = 0;
       }
       pageController.animateToPage(
-        pageNo,
+        currentIndex,
         duration: const Duration(seconds: 1),
         curve: Curves.easeInOutCirc,
       );
-      pageNo++;
+      currentIndex++;
     });
   }
 
@@ -121,6 +121,15 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         "${loggedInUser.email}",
+                        style: GoogleFonts.openSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600)),
+                      ),
+
+                      Text(
+                        "${loggedInUser.phone}",
                         style: GoogleFonts.openSans(
                             textStyle: const TextStyle(
                                 color: Colors.black,
@@ -295,8 +304,9 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 300,
@@ -304,46 +314,40 @@ class _HomePageState extends State<HomePage> {
                   child: PageView.builder(
                     controller: pageController,
                     onPageChanged: (index) {
-                      pageNo = index;
-                      setState(() {});
+
+                      setState(() {
+                        currentIndex = index% images.length;
+                      });
                     },
                     itemBuilder: (_, index) {
-                      return AnimatedBuilder(
-                        animation: pageController,
-                        builder: (ctx, child) {
-                          return child!;
-                        },
-                        child: SizedBox(
-                          height: 300,
-                          width: double.infinity,
-                          child: Image.asset(
-                            images[index],
-                            fit: BoxFit.cover,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: AnimatedBuilder(
+                          animation: pageController,
+                          builder: (ctx, child) {
+                            return child!;
+                          },
+                          child: SizedBox(
+                            height: 300,
+                            width: double.infinity,
+                            child: Image.asset(
+                              images[index % images.length],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       );
                     },
-                    itemCount: images.length,
+                    //itemCount: images.length,
                   ),
                 ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    3,
-                    (index) => GestureDetector(
-                      child: Container(
-                        margin: const EdgeInsets.all(2.0),
-                        child: Icon(
-                          Icons.circle,
-                          size: 12.0,
-                          color: pageNo == index
-                              ? Colors.indigoAccent
-                              : Colors.grey.shade300,
-                        ),
-                      ),
-                    ),
-                  ),
+                  children: [
+                    for (var i =0; i < images.length; i++)
+                      buildIndicator(currentIndex == i)
+                  ],
                 ),
 
                 //greeting
@@ -371,30 +375,6 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      /* Text(
-                        "${loggedInUser.email}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Text(
-                        "${loggedInUser.phone}",
-                        style: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600)),
-                      ),*/
-                      // Text(
-                      //   "${loggedInUser.role}",
-                      //   style: GoogleFonts.openSans(
-                      //       textStyle: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w600)),
-                      // ),
                     ],
                   ),
                 ),
@@ -456,12 +436,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
-
-  Widget buildImage(String image, int index) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        child: Image.asset(
-          image,
-          fit: BoxFit.cover,
+  Widget buildIndicator (bool isSelected) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 1),
+      child: Container(
+        height: isSelected ? 12 : 8,
+        width: isSelected ? 12 : 8,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isSelected ? Colors.indigoAccent : Colors.grey.shade300,
         ),
-      );
+      ),
+    );
+  }
 }

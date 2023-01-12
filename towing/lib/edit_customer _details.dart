@@ -89,11 +89,11 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                   height: 30,
 
                 ),
-                buildTextField("First Name", "Ram", false),
-                buildTextField("Second Name", "Shrestha", false),
-                buildTextField("Email", "ramshrestha@gmail.com", false),
-                buildTextField("Password", "*******", true),
-                buildTextField("Phone Number", "9810234567", false),
+                buildTextField("First Name", "${loggedInUser.firstName}", false),
+                buildTextField("Second Name", "${loggedInUser.lastName}", false),
+                buildTextField("Email", "${loggedInUser.email}", false),
+                buildTextField("Password", "${loggedInUser.password}", true),
+                buildTextField("Phone Number", "${loggedInUser.phone}", false),
                 SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,51 +124,11 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                     ),)
                   ],
                 )
-
-
-
-
-
-
               ],
             ),
           ),
         ),
       ),
-
-      /*body: SafeArea(
-            child: Container(
-              child: Column(
-                children: [
-                  Text(
-                    "${loggedInUser.firstName} ${loggedInUser.lastName}",
-                    style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                  Text(
-                    "${loggedInUser.email}",
-                    style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                  Text(
-                    "${loggedInUser.phone}",
-                    style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                ],
-              ),
-            )
-
-        )*/
     );
   }
 
