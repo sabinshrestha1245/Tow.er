@@ -1,5 +1,8 @@
+import 'package:Tow.er/map/address.dart';
 import 'package:flutter/material.dart';
 import 'package:Tow.er/pages/homepage.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:Tow.er/map/assistant_methods.dart';
 
 class Billing extends StatefulWidget {
   const Billing({Key? key}) : super(key: key);
@@ -8,7 +11,18 @@ class Billing extends StatefulWidget {
   State<Billing> createState() => _BillingState();
 }
 
+// void calculateDistance() {
+//   double distanceInMeters = Geolocator.distanceBetween(AssistantMethods().pickAddLong, pickAddLat, dropAddLat, dropAddLong);
+//   print(distanceInMeters);
+// }
+
 class _BillingState extends State<Billing> {
+  double distanceInMeters = Geolocator.distanceBetween(
+      Address().pickUpLatitude!,
+      Address().pickUpLongitude!,
+      Address().dropOffLatitude!,
+      Address().dropOffLongitude!);
+
   @override
   Widget build(BuildContext context) {
     final confirmButton = Material(
@@ -21,8 +35,7 @@ class _BillingState extends State<Billing> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => HomePage()
-                ),
+                MaterialPageRoute(builder: (context) => HomePage()),
                 (route) => true);
           },
           child: const Text(
@@ -51,6 +64,7 @@ class _BillingState extends State<Billing> {
                 Text('Remarks: '),
                 Text('Date: '),
                 Text('Time: '),
+                Text('distance: '+ distanceInMeters.toString()),
                 confirmButton,
               ],
             ),

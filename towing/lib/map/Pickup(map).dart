@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Tow.er/Customer_Services/Cus_tow.dart';
 import 'package:Tow.er/map/Dropoff(map).dart';
+import 'package:Tow.er/map/address.dart';
 import 'package:Tow.er/map/app_data.dart';
 import 'package:Tow.er/map/assistant_methods.dart';
 import 'package:Tow.er/map/global.dart';
@@ -66,8 +67,7 @@ class MapSampleState extends State<PickMap> {
   }
 
   void _getPinnedAddress() async {
-    await AssistantMethods.pickOriginPositionOnMap(
-        onCameraMoveEndLatLng!, context);
+    await AssistantMethods.pickUpPositionOnMap(onCameraMoveEndLatLng!, context);
   }
 
   void _getMarker() async {
@@ -88,8 +88,8 @@ class MapSampleState extends State<PickMap> {
   Widget build(BuildContext context) {
     final appData = Provider.of<AppData>(context);
     String originAddress;
-    if (appData.pinnedLocationOnMap != null) {
-      originAddress = appData.pinnedLocationOnMap!.placeName.toString();
+    if (appData.pinnedPickUpLocationOnMap != null) {
+      originAddress = appData.pinnedPickUpLocationOnMap!.pickUpPlaceName.toString();
     } else {
       originAddress = "Searching...";
     }
@@ -126,7 +126,6 @@ class MapSampleState extends State<PickMap> {
                         print(onCameraMoveEndLatLng);
                       }
                     },
-                    // pickLat=onCameraMoveEndLatLng.latitude;
                     onCameraIdle: _getPinnedAddress,
 
                     onMapCreated: (GoogleMapController controller) {
@@ -205,7 +204,7 @@ class MapSampleState extends State<PickMap> {
                                     (context),
                                     MaterialPageRoute(
                                         builder: (context) => Tow()),
-                                    (route) => false);
+                                    (route) => true);
                               },
                               child: const Text(
                                 "Back To Details",
@@ -218,11 +217,13 @@ class MapSampleState extends State<PickMap> {
                             ),
                             TextButton(
                               onPressed: () {
+
+
                                 Navigator.pushAndRemoveUntil(
                                     (context),
                                     MaterialPageRoute(
                                         builder: (context) => DropMap()),
-                                    (route) => false);
+                                    (route) => true);
                               },
                               child: const Text(
                                 "Continue",
