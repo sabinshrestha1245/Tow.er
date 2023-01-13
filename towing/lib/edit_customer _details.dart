@@ -24,7 +24,12 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
   String? email = '';
   String? password = '';
   String? phone = '';
-  String? userNameInput = '';
+  String? userFirstNameInput = '';
+  String? userLastNameInput = '';
+  String? userEmailInput = '';
+  String? userPasswordInput = '';
+  String? userPhoneInput = '';
+
 
   Future _getDataFromDatabase() async {
     await FirebaseFirestore.instance
@@ -61,13 +66,33 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
     });
   }
 
-  Future _updateUserName() async {
+  Future _updateUserFirstName() async {
     await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
-      "firstName": userNameInput,
+      "firstName": userFirstNameInput,
+    });
+  }
+  Future _updateUserLastName() async {
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "lastName": userLastNameInput,
+    });
+  }
+  Future _updateUserEmail() async {
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "email": userEmailInput,
+    });
+  }
+  Future _updateUserPassword() async {
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "password": userPasswordInput,
+    });
+  }
+  Future _updateUserPhone() async {
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "phone": userPhoneInput,
     });
   }
 
-  _displayTextInputDialog(BuildContext context) async {
+  _displayFirstNameTextInputDialog(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -76,7 +101,7 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
             content: TextField(
               onChanged: (value) {
                 setState(() {
-                  userNameInput = value;
+                  userFirstNameInput = value;
                 });
               },
               decoration: InputDecoration(hintText: "Type Here"),
@@ -102,7 +127,195 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
-                  _updateUserName();
+                  _updateUserFirstName();
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+  _displayLastNameTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Your Last Name Here'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  userLastNameInput = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Type Here"),
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  _updateUserLastName();
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+  _displayEmailTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Your Email Here'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  userEmailInput = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Type Here"),
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  _updateUserEmail();
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+  _displayPasswordTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Your Password Here'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  userPasswordInput = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Type Here"),
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  _updateUserPassword();
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amber,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+  _displayPhoneTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Your Phone Here'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  userPhoneInput = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Type Here"),
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  _updateUserPhone();
                   Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (_) => HomePage()));
                 },
@@ -118,6 +331,16 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.white60,
+        elevation: 0,
+        title: const Text(
+          "Edit User Details",
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -173,52 +396,60 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                 Text(
                   'First Name: ' + firstName!,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
                 IconButton(
                     onPressed: () {
-                      _displayTextInputDialog(context);
+                      _displayFirstNameTextInputDialog(context);
                     },
                     icon: Icon(Icons.edit)),
                 Text(
-                  'last Name: ' + lastName!,
+                  'Last Name: ' + lastName!,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                IconButton(onPressed: () {
+                  _displayLastNameTextInputDialog(context);
+                }, icon: Icon(Icons.edit)),
                 Text(
-                  'First Name: ' + firstName!,
+                  'Email: ' + email!,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                IconButton(onPressed: () {
+                  _displayEmailTextInputDialog(context);
+                }, icon: Icon(Icons.edit)),
                 Text(
-                  'First Name: ' + firstName!,
+                  'Password: ' + password!,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                IconButton(onPressed: () {
+                  _displayPasswordTextInputDialog(context);
+                }, icon: Icon(Icons.edit)),
                 Text(
-                  'First Name: ' + firstName!,
+                  'Phone: ' + phone!,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                IconButton(onPressed: () {
+                  _displayPhoneTextInputDialog(context);
+                }, icon: Icon(Icons.edit)),
                 /*buildTextField("First Name", "${loggedInUser.firstName}", false),
                 buildTextField("Second Name", "${loggedInUser.lastName}", false),
                 buildTextField("Email", "${loggedInUser.email}", false),
@@ -227,7 +458,7 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                 SizedBox(
                   height: 30,
                 ),
-                Row(
+                /*Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     OutlinedButton(
@@ -260,7 +491,7 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                               borderRadius: BorderRadius.circular(20))),
                     )
                   ],
-                )
+                )*/
               ],
             ),
           ),

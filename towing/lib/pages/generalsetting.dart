@@ -16,17 +16,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.white60,
+        elevation: 0,
+        title: const Text(
+          "Settings",
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+             /* const Text(
                 "Settings",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 40),
+              ),*/
+              /*const SizedBox(height: 40),*/
               SettingsTile(
                 color: Colors.blue,
                 icon: Ionicons.person_circle_outline,
