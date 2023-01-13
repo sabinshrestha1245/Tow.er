@@ -6,7 +6,7 @@ import 'package:Tow.er/map/Pickup(map).dart';
 import 'package:Tow.er/map/app_data.dart';
 import 'package:Tow.er/map/assistant_methods.dart';
 import 'package:Tow.er/map/global.dart';
-// import 'package:Tower/map/location_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -35,6 +35,11 @@ class MapSampleState extends State<DropMap> {
   LatLng? onCameraMoveEndLatLng;
   bool isPinMarkerVisible = true;
   Uint8List pickUpMarker = Uint8List.fromList([]);
+
+  var _latitude;
+  var _longitude;
+  var _PlaceName;
+
 
   checkIfLocationPermissionAllowed() async {
     _locationPermission = await Geolocator.requestPermission();
@@ -128,6 +133,10 @@ class MapSampleState extends State<DropMap> {
                         onCameraMoveEndLatLng =
                             await pickLocationOnMap(position);
                         print(onCameraMoveEndLatLng);
+                        setState(() {
+                          _latitude = onCameraMoveEndLatLng?.latitude;
+                          _longitude = onCameraMoveEndLatLng?.longitude;
+                        });
                       }
                     },
                     // pickLat=onCameraMoveEndLatLng.latitude;
@@ -212,7 +221,7 @@ class MapSampleState extends State<DropMap> {
                                     (route) => true);
                               },
                               child: const Text(
-                                "Back To Details",
+                                "Back To Pickup",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.red,
@@ -222,8 +231,7 @@ class MapSampleState extends State<DropMap> {
                             ),
                             TextButton(
                               onPressed: () {
-
-
+                                postDataToFirebase();
                                 Navigator.pushAndRemoveUntil(
                                     (context),
                                     MaterialPageRoute(
@@ -248,5 +256,14 @@ class MapSampleState extends State<DropMap> {
               ),
             ),
     );
+  }
+  postDataToFirebase() async {
+    var firebaseFirestore = await FirebaseFirestore.instance.collection(
+        'DropOffDetails').doc().set({
+      "DropOff Latitude": _latitude.toString(),
+      "DropOff Longitude": _longitude.toString(),
+      // "Pickup Area Name": _PlaceName.toString(),
+    });
+
   }
 }
