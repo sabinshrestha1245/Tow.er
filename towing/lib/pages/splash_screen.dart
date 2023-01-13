@@ -1,4 +1,4 @@
-import 'package:Tow.er/splashpage.dart';
+import 'package:Tow.er/pages/splashpage.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 
