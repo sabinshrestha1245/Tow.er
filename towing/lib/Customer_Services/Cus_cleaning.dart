@@ -215,7 +215,7 @@ class _CleanState extends State<Cleaning> {
             Navigator.pushAndRemoveUntil(
                 (context),
                 MaterialPageRoute(builder: (context) => PickMap()),
-                (route) => false);
+                (route) => true);
           },
           child: const Text(
             "Continue",

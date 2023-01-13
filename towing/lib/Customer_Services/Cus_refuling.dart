@@ -125,7 +125,7 @@ class _RefuelState extends State<Refuling> {
             Navigator.pushAndRemoveUntil(
                 (context),
                 MaterialPageRoute(builder: (context) => PickMap()),
-                (route) => false);
+                (route) => true);
           },
           child: const Text(
             "Continue",
