@@ -37,6 +37,8 @@ class MapSampleState extends State<PickMap> {
 
   //String? onCameraMoveEndLatLng = '';
 
+  var _latitude;
+  var _longitude;
 
 
   checkIfLocationPermissionAllowed() async {
@@ -130,6 +132,10 @@ class MapSampleState extends State<PickMap> {
                         onCameraMoveEndLatLng =
                             await pickLocationOnMap(position);
                         print(onCameraMoveEndLatLng);
+                        setState(() {
+                          _latitude = onCameraMoveEndLatLng?.latitude;
+                          _longitude = onCameraMoveEndLatLng?.longitude;
+                        });
                       }
                     },
                     onCameraIdle: _getPinnedAddress,
@@ -223,8 +229,7 @@ class MapSampleState extends State<PickMap> {
                             ),
                             TextButton(
                               onPressed: () {
-
-
+                                postDataToFirebase();
                                 Navigator.pushAndRemoveUntil(
                                     (context),
                                     MaterialPageRoute(
@@ -251,11 +256,14 @@ class MapSampleState extends State<PickMap> {
     );
   }
   postDataToFirebase() async{
+    var firebaseFirestore = await FirebaseFirestore.instance.collection('pickupDetails').doc().set({
+      "Latitude": _latitude.toString(),
+      "Longitude": _longitude.toString(),
+    });
     /*FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     Address? address = firebaseFirestore.currentAddress;
     Address address = Address();
     address?.pickUpLatitude = address!.pickUpLatitude;
 */
     // writing all the values
-  }
 }
