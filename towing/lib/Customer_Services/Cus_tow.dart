@@ -145,6 +145,7 @@ class _TowState extends State<Tow> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
+            postRequestTowOrderToFirestore();
             Navigator.pushAndRemoveUntil(
                 (context),
                 MaterialPageRoute(builder: (context) => PickMap()),
@@ -220,9 +221,15 @@ class _TowState extends State<Tow> {
 
     var firebaseFirestore = await FirebaseFirestore.instance.collection('towDetail');
     User? user = _firebaseAuth.currentUser;
+    //var name = user?.displayName;
     //await firebaseFirestore
 
     RequestTowOrder requestTowOrder = RequestTowOrder();
+
+    return firebaseFirestore
+        .add({
+          'firstName': requestTowOrder.carModel,
+    });
 
     // writing all the values
     /*requestTowOrder.uid = user?.uid;
@@ -235,8 +242,7 @@ class _TowState extends State<Tow> {
     requestTowOrder.carPlateNo = carPlateNo.text;
     requestTowOrder.remarks = remarks.text;
     requestTowOrder.date = '2023-01-03';
-    requestTowOrder.time = '12: 30';
-*/
+    requestTowOrder.time = '12: 30';*/
 
 
     /*await firebaseFirestore
