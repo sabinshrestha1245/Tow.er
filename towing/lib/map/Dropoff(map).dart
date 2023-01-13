@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:Tow.er/map/address.dart';
 
 class DropMap extends StatefulWidget {
   @override
@@ -68,13 +69,13 @@ class MapSampleState extends State<DropMap> {
   }
 
   void _getPinnedAddress() async {
-    await AssistantMethods.pickOriginPositionOnMap(
+    await AssistantMethods.dropOffPositionOnMap(
         onCameraMoveEndLatLng!, context);
   }
 
   void _getMarker() async {
     pickUpMarker =
-        await AssistantMethods.getDropMarker(userPickUpMarker, context);
+        await AssistantMethods.getDropMarker(userDropOffMarker, context);
     setState(() {});
   }
 
@@ -90,8 +91,8 @@ class MapSampleState extends State<DropMap> {
   Widget build(BuildContext context) {
     final appData = Provider.of<AppData>(context);
     String originAddress;
-    if (appData.pinnedLocationOnMap != null) {
-      originAddress = appData.pinnedLocationOnMap!.placeName.toString();
+    if (appData.pinnedDropOffLocationOnMap != null) {
+      originAddress = appData.pinnedDropOffLocationOnMap!.dropOffPlaceName.toString();
     } else {
       originAddress = "Searching...";
     }
@@ -220,6 +221,20 @@ class MapSampleState extends State<DropMap> {
                             ),
                             TextButton(
                               onPressed: () {
+                                void calculateDistance() {
+                                  double distanceInMeters =
+                                      Geolocator.distanceBetween(
+                                          Address().pickUpLatitude!,
+                                          Address().pickUpLongitude!,
+                                          Address().dropOffLatitude!,
+                                          Address().dropOffLongitude!);
+                                  print(Address().pickUpLatitude);
+                                  print(Address().pickUpLongitude);
+                                  print(Address().dropOffLatitude);
+                                  print(Address().dropOffLongitude);
+                                  print(distanceInMeters);
+                                }
+
                                 Navigator.pushAndRemoveUntil(
                                     (context),
                                     MaterialPageRoute(
