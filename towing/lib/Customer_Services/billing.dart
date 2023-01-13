@@ -1,9 +1,11 @@
 import 'package:Tow.er/Customer_Services/Searching.dart';
-import 'package:Tow.er/map/address.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:Tow.er/pages/homepage.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:Tow.er/map/assistant_methods.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../model/user_model.dart';
+import '../request_tow_order.dart';
 
 class Billing extends StatefulWidget {
   const Billing({Key? key}) : super(key: key);
@@ -18,6 +20,26 @@ class Billing extends StatefulWidget {
 // }
 
 class _BillingState extends State<Billing> {
+
+  final _firebaseAuth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+
+      setState(() {});
+    });
+  }
+
   // double distanceInMeters = Geolocator.distanceBetween(
   //     Address().pickUpLatitude!,
   //     Address().pickUpLongitude!,
@@ -56,8 +78,18 @@ class _BillingState extends State<Billing> {
             padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Column(
               children: [
-                Text('Name: '),
-                Text('Phone Number: '),
+                Text('Name:${loggedInUser.firstName} ${loggedInUser.lastName}',
+                  style: GoogleFonts.openSans(
+                      textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
+                ),
+                Text('Phone Number: ${loggedInUser.phone}', style: GoogleFonts.openSans(
+                    textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),),
                 Text('Pick up location: '),
                 Text('Drop off location: '),
                 Text('Vechile model: '),
@@ -74,4 +106,6 @@ class _BillingState extends State<Billing> {
       ),
     );
   }
+
+
 }

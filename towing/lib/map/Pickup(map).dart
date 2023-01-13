@@ -5,6 +5,8 @@ import 'package:Tow.er/map/address.dart';
 import 'package:Tow.er/map/app_data.dart';
 import 'package:Tow.er/map/assistant_methods.dart';
 import 'package:Tow.er/map/global.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:Tower/map/location_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +34,10 @@ class MapSampleState extends State<PickMap> {
   LatLng? onCameraMoveEndLatLng;
   bool isPinMarkerVisible = true;
   Uint8List pickUpMarker = Uint8List.fromList([]);
+
+  //String? onCameraMoveEndLatLng = '';
+
+
 
   checkIfLocationPermissionAllowed() async {
     _locationPermission = await Geolocator.requestPermission();
@@ -243,5 +249,13 @@ class MapSampleState extends State<PickMap> {
               ),
             ),
     );
+  }
+  postDataToFirebase() async{
+    /*FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    Address? address = firebaseFirestore.currentAddress;
+    Address address = Address();
+    address?.pickUpLatitude = address!.pickUpLatitude;
+*/
+    // writing all the values
   }
 }

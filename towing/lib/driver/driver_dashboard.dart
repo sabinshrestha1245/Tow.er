@@ -11,6 +11,8 @@ import 'package:Tow.er/pages/loginpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../pages/contact _information.dart';
+
 class DriverDashboard extends StatefulWidget {
   const DriverDashboard({Key? key}) : super(key: key);
 
@@ -64,7 +66,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
         iconTheme: IconThemeData(color: Colors.green),
       ),*/
         key: _globalKey,
-        /*drawer: Drawer(
+        drawer: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
           // space to fit everything.
@@ -94,14 +96,14 @@ class _DriverDashboardState extends State<DriverDashboard> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600)),
                       ),
-                      */ /* SizedBox(
+                       /* SizedBox(
                       height: 50,
                       child:
                       Image.network(FirebaseAuth.instance.currentUser!.photoURL!,
                             ),
-                        ),*/ /*
+                        ),
 
-                      */ /*Text("${FirebaseAuth.instance.currentUser!.displayName}",
+                       Text("${FirebaseAuth.instance.currentUser!.displayName}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -111,7 +113,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
-                      ),),*/ /*
+                      ),),*/
                     ],
                   )),
               ListTile(
@@ -202,10 +204,10 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.pop(context);
                 },
               ),
-              */ /*const Divider(
+               const Divider(
                 thickness: 2,
-              ),*/ /*
-              */ /*ListTile(
+              ),
+               ListTile(
                 leading: const Icon(
                   Icons.chat_bubble_outline,
                   color: Colors.black,
@@ -223,7 +225,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactInformation()));
                   // Then close the drawer
                 },
-              ),*/ /*
+              ),
               const Divider(
                 thickness: 2,
               ),
@@ -274,7 +276,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
               ),
             ],
           ),
-        ),*/
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -284,7 +286,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //meue or drawer
-                    /*Container(
+                    Container(
                       decoration: BoxDecoration(
                           color: Colors.white60,
                           borderRadius: BorderRadius.circular(20)),
@@ -296,7 +298,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
                         icon: const Icon(Icons.menu),
                         color: Colors.black,
                       ),
-                    ),*/
+                    ),
                     //Notification
                     Container(
                         decoration: BoxDecoration(
@@ -388,46 +390,7 @@ class _DriverDashboardState extends State<DriverDashboard> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavyBar(
-          selectedIndex: _selectedIndex,
-          showElevation: true, // use this to remove appBar's elevation
-          onItemSelected: (index) => setState(() {
-            _selectedIndex = index;
-            Fluttertoast.showToast(
-                msg: "This is Center Short Toast",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0);
-            child:
-            InkWell(onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => tapped(context, index)),
-              );
-            });
-          }),
-          items: [
-            BottomNavyBarItem(
-              icon: const Icon(Icons.home),
-              title: const Text('Home'),
-              activeColor: Colors.red,
-            ),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.access_time_outlined),
-                title: const Text('Check History'),
-                activeColor: Colors.purpleAccent),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.message),
-                title: const Text('Messages'),
-                activeColor: Colors.pink),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.settings),
-                title: const Text('Settings'),
-                activeColor: Colors.blue),
-          ],
-        ));
+
+        );
   }
 }

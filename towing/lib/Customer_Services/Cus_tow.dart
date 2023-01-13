@@ -1,7 +1,12 @@
 import 'package:Tow.er/map/Pickup(map).dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:Tower/pages/homepage.dart';
 // import 'package:Tower/pages/signuppage.dart';
 import 'package:flutter/material.dart';
+
+import '../model/user_model.dart';
+import '../request_tow_order.dart';
 // import 'package:Tower/authentication/auth.dart';
 // import 'package:Tower/model/user_model.dart';
 // import 'package:Tower/pages/loginpage.dart';
@@ -17,6 +22,26 @@ class Tow extends StatefulWidget {
 }
 
 class _TowState extends State<Tow> {
+
+  final _firebaseAuth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+
+      setState(() {});
+    });
+  }
   // string for displaying the error Message
   String? errorMessage;
 
@@ -186,5 +211,41 @@ class _TowState extends State<Tow> {
         ),
       ),
     );
+  }
+
+  postRequestTowOrderToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sending these values
+
+    var firebaseFirestore = await FirebaseFirestore.instance.collection('towDetail');
+    User? user = _firebaseAuth.currentUser;
+    //await firebaseFirestore
+
+    RequestTowOrder requestTowOrder = RequestTowOrder();
+
+    // writing all the values
+    /*requestTowOrder.uid = user?.uid;
+    requestTowOrder.firstName = user?.firstName;
+    requestTowOrder.lastName = user?.lastName;
+    requestTowOrder.phone = user?.phoneNumber;
+    requestTowOrder.pickUplocation = 'thankot';
+    requestTowOrder.dropOfflocation = 'pcps, kupindol';
+    requestTowOrder.carModel = carModel.text;
+    requestTowOrder.carPlateNo = carPlateNo.text;
+    requestTowOrder.remarks = remarks.text;
+    requestTowOrder.date = '2023-01-03';
+    requestTowOrder.time = '12: 30';
+*/
+
+
+    /*await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil((context),
+        MaterialPageRoute(builder: (context) => Signin()), (route) => false);*/
   }
 }

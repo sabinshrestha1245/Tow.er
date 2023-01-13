@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'driver/driver_dashboard.dart';
+import 'mechanic/mechanic_dashboard.dart';
 import 'model/user_model.dart';
 
 class EditCustomerDetails extends StatefulWidget {
@@ -316,8 +319,40 @@ class _EditCustomerDetailsState extends State<EditCustomerDetails> {
                 ),
                 onPressed: () {
                   _updateUserPhone();
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                  /*Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));*/
+                  final storage = const FlutterSecureStorage();
+                  route(User? user) async {
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user!.uid)
+                        .get()
+                        .then((DocumentSnapshot documentSnapshot) {
+                      if (documentSnapshot.exists) {
+                        var data = documentSnapshot.data();
+                        UserModel model = UserModel.fromMap(data);
+                        if(model.role == "Customer"){
+                          storage.write(key: "role",value: "Customer");
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => HomePage()));
+                        }
+                        else if(model.role == "Mechanic"){
+                          storage.write(key: "role",value: "Mechanic");
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => MechanicDashboard()));
+                        }
+                        else{
+                          storage.write(key: "role",value: "Driver");
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => DriverDashboard()));
+                        }
+
+                      }
+                    });
+
+
+
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
