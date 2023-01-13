@@ -259,7 +259,7 @@ class MapSampleState extends State<DropMap> {
   }
   postDataToFirebase() async {
     var firebaseFirestore = await FirebaseFirestore.instance.collection(
-        'DropOffDetails').doc().set({
+        'LocationDetails').doc().set({
       "DropOff Latitude": _latitude.toString(),
       "DropOff Longitude": _longitude.toString(),
       // "Pickup Area Name": _PlaceName.toString(),

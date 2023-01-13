@@ -259,7 +259,7 @@ class PickUpMapState extends State<PickMap> {
 
   postDataToFirebase() async {
     var firebaseFirestore = await FirebaseFirestore.instance.collection(
-        'pickupDetails').doc().set({
+        'LocationDetails').doc().set({
       "Pickup Latitude": _latitude.toString(),
       "Pickup Longitude": _longitude.toString(),
       // "Pickup Area Name": _PlaceName.toString(),
