@@ -1,3 +1,4 @@
+import 'package:Tow.er/Customer_Services/Searching.dart';
 import 'package:Tow.er/map/address.dart';
 import 'package:flutter/material.dart';
 import 'package:Tow.er/pages/homepage.dart';
@@ -17,11 +18,11 @@ class Billing extends StatefulWidget {
 // }
 
 class _BillingState extends State<Billing> {
-  double distanceInMeters = Geolocator.distanceBetween(
-      Address().pickUpLatitude!,
-      Address().pickUpLongitude!,
-      Address().dropOffLatitude!,
-      Address().dropOffLongitude!);
+  // double distanceInMeters = Geolocator.distanceBetween(
+  //     Address().pickUpLatitude!,
+  //     Address().pickUpLongitude!,
+  //     Address().dropOffLatitude!,
+  //     Address().dropOffLongitude!);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class _BillingState extends State<Billing> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => search()),
                 (route) => true);
           },
           child: const Text(
@@ -64,7 +65,7 @@ class _BillingState extends State<Billing> {
                 Text('Remarks: '),
                 Text('Date: '),
                 Text('Time: '),
-                Text('distance: '+ distanceInMeters.toString()),
+                // Text('distance: '+ distanceInMeters.toString()),
                 confirmButton,
               ],
             ),

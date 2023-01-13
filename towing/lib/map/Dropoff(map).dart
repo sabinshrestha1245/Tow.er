@@ -221,19 +221,7 @@ class MapSampleState extends State<DropMap> {
                             ),
                             TextButton(
                               onPressed: () {
-                                void calculateDistance() {
-                                  double distanceInMeters =
-                                      Geolocator.distanceBetween(
-                                          Address().pickUpLatitude!,
-                                          Address().pickUpLongitude!,
-                                          Address().dropOffLatitude!,
-                                          Address().dropOffLongitude!);
-                                  print(Address().pickUpLatitude);
-                                  print(Address().pickUpLongitude);
-                                  print(Address().dropOffLatitude);
-                                  print(Address().dropOffLongitude);
-                                  print(distanceInMeters);
-                                }
+
 
                                 Navigator.pushAndRemoveUntil(
                                     (context),
